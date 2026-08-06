@@ -1,0 +1,256 @@
+@use '../../styles/variables' as v;
+
+.page {
+  padding: v.$space-6 0 v.$space-16;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: v.$space-2;
+  font-size: v.$font-size-sm;
+  color: var(--dl-text-secondary);
+  margin-bottom: v.$space-6;
+
+  a {
+    color: var(--dl-text-secondary);
+
+    &:hover {
+      color: var(--dl-primary-600);
+    }
+  }
+}
+
+// ── Hero ──────────────────────────────────────────────────────────────
+.hero {
+  position: relative;
+  min-height: 280px;
+  border-radius: v.$radius-xl;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  background: linear-gradient(135deg, var(--dl-primary-500), var(--dl-secondary-600));
+  margin-bottom: v.$space-8;
+  color: #fff;
+}
+
+.heroImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgb(0 0 0 / 65%) 0%, rgb(0 0 0 / 10%) 60%, transparent 100%);
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  padding: v.$space-8;
+
+  @media (max-width: v.$breakpoint-sm) {
+    padding: v.$space-6 v.$space-4;
+  }
+}
+
+.heroBadges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: v.$space-2;
+  margin-bottom: v.$space-3;
+}
+
+.heroTitle {
+  color: #fff;
+  font-size: v.$font-size-3xl;
+  margin-bottom: v.$space-3;
+
+  @media (max-width: v.$breakpoint-sm) {
+    font-size: v.$font-size-xl;
+  }
+}
+
+.heroMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: v.$space-6;
+  color: rgb(255 255 255 / 90%);
+  font-size: v.$font-size-sm;
+}
+
+.heroMetaItem {
+  display: flex;
+  align-items: center;
+  gap: v.$space-2;
+}
+
+// ── Layout 2 cột ──────────────────────────────────────────────────────
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: v.$space-8;
+
+  @media (max-width: v.$breakpoint-lg) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.main {
+  min-width: 0;
+}
+
+.section {
+  margin-bottom: v.$space-8;
+}
+
+.sectionTitle {
+  margin-bottom: v.$space-4;
+}
+
+.description {
+  color: var(--dl-text-secondary);
+  line-height: v.$line-height-relaxed;
+  white-space: pre-line;
+}
+
+.lessonList {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-3;
+}
+
+.lessonItem {
+  display: flex;
+  align-items: center;
+  gap: v.$space-4;
+}
+
+.lessonIndex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: v.$radius-full;
+  background-color: var(--dl-primary-50);
+  color: var(--dl-primary-600);
+  font-weight: v.$font-weight-bold;
+  font-size: v.$font-size-sm;
+}
+
+.lessonBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.lessonTitle {
+  font-weight: v.$font-weight-semibold;
+  color: var(--dl-text-primary);
+}
+
+.lessonMeta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: v.$font-size-xs;
+  color: var(--dl-text-tertiary);
+}
+
+.emptyLessons {
+  color: var(--dl-text-secondary);
+  text-align: center;
+  padding: v.$space-8 0;
+}
+
+// ── Sidebar ───────────────────────────────────────────────────────────
+.sidebar {
+  min-width: 0;
+}
+
+.sidebarCard {
+  position: sticky;
+  top: v.$space-6;
+}
+
+.statRow {
+  display: flex;
+  align-items: center;
+  gap: v.$space-3;
+  padding: v.$space-3 0;
+  border-bottom: 1px solid var(--dl-border);
+  font-size: v.$font-size-sm;
+
+  &:first-child {
+    padding-top: 0;
+  }
+
+  &:last-of-type {
+    border-bottom: none;
+  }
+}
+
+.statIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: v.$radius-sm;
+  background-color: var(--dl-card-hover);
+  color: var(--dl-text-secondary);
+}
+
+.statLabel {
+  color: var(--dl-text-secondary);
+}
+
+.statValue {
+  margin-left: auto;
+  font-weight: v.$font-weight-semibold;
+  color: var(--dl-text-primary);
+}
+
+.enrollButton {
+  margin-top: v.$space-4;
+}
+
+.enrollBanner {
+  display: flex;
+  align-items: center;
+  gap: v.$space-2;
+  margin-top: v.$space-4;
+  padding: v.$space-3;
+  border-radius: v.$radius-sm;
+  background-color: var(--dl-success-50);
+  color: var(--dl-success-600);
+  font-size: v.$font-size-sm;
+}
+
+// ── Error / loading state ────────────────────────────────────────────
+.errorState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: v.$space-16 v.$space-4;
+  color: var(--dl-text-secondary);
+}
+
+.errorIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: v.$radius-full;
+  background-color: var(--dl-danger-50);
+  color: var(--dl-danger-600);
+  margin-bottom: v.$space-4;
+}
