@@ -1,9 +1,12 @@
 import { useState } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import { useForm, useWatch } from 'react-hook-form'
+import { CheckCircle2, Lock, TriangleAlert } from 'lucide-react'
 import authService from '../../services/authService'
 import { getApiErrorMessage } from '../../api/apiError'
+import { Button, ButtonLink, Input } from '../../components/ui'
 import type { ResetPasswordRequest } from '../../types/auth'
+import styles from './AuthForm.module.scss'
 
 const PASSWORD_PATTERN = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/
 
@@ -41,64 +44,75 @@ function ResetPasswordPage() {
 
   if (successMessage) {
     return (
-      <div className="container py-5" style={{ maxWidth: 420 }}>
-        <div className="alert alert-success">{successMessage}</div>
-        <Link to="/login" className="btn btn-primary">
+      <div className={styles.successState}>
+        <span className={styles.successIcon}>
+          <CheckCircle2 size={32} />
+        </span>
+        <h1 className={styles.successTitle}>Đặt lại mật khẩu thành công</h1>
+        <p className={styles.successText}>{successMessage}</p>
+        <ButtonLink to="/login" fullWidth>
           Về trang đăng nhập
-        </Link>
+        </ButtonLink>
       </div>
     )
   }
 
   if (!token) {
     return (
-      <div className="container py-5" style={{ maxWidth: 420 }}>
-        <div className="alert alert-danger">Link đặt lại mật khẩu không hợp lệ - thiếu token.</div>
-        <Link to="/forgot-password" className="btn btn-primary">
+      <div className={styles.successState}>
+        <span className={styles.errorIcon}>
+          <TriangleAlert size={32} />
+        </span>
+        <h1 className={styles.successTitle}>Link không hợp lệ</h1>
+        <p className={styles.successText}>Link đặt lại mật khẩu không hợp lệ hoặc thiếu token.</p>
+        <ButtonLink to="/forgot-password" fullWidth>
           Yêu cầu link mới
-        </Link>
+        </ButtonLink>
       </div>
     )
   }
 
   return (
-    <div className="container py-5" style={{ maxWidth: 420 }}>
-      <h1 className="h3 mb-4">Đặt lại mật khẩu</h1>
-      {serverError && <div className="alert alert-danger">{serverError}</div>}
-      <form onSubmit={handleSubmit(onSubmit)} noValidate>
-        <div className="mb-3">
-          <label className="form-label" htmlFor="newPassword">
-            Mật khẩu mới
-          </label>
-          <input
-            id="newPassword"
-            type="password"
-            className={`form-control ${errors.newPassword ? 'is-invalid' : ''}`}
-            {...register('newPassword', {
-              required: 'Password mới không được để trống',
-              pattern: { value: PASSWORD_PATTERN, message: 'Password phải từ 8 ký tự trở lên, có ít nhất 1 chữ và 1 số' },
-            })}
-          />
-          {errors.newPassword && <div className="invalid-feedback">{errors.newPassword.message}</div>}
+    <div>
+      <h1 className={styles.heading}>Đặt lại mật khẩu</h1>
+      <p className={styles.subheading}>Nhập mật khẩu mới cho tài khoản của bạn</p>
+
+      {serverError && (
+        <div className={`${styles.banner} ${styles.bannerError}`} role="alert">
+          <TriangleAlert size={18} className={styles.bannerIcon} />
+          <span>{serverError}</span>
         </div>
-        <div className="mb-3">
-          <label className="form-label" htmlFor="confirmNewPassword">
-            Xác nhận mật khẩu mới
-          </label>
-          <input
-            id="confirmNewPassword"
-            type="password"
-            className={`form-control ${errors.confirmNewPassword ? 'is-invalid' : ''}`}
-            {...register('confirmNewPassword', {
-              required: 'Confirm password mới không được để trống',
-              validate: (value) => value === newPassword || 'Confirm password mới không khớp với password mới',
-            })}
-          />
-          {errors.confirmNewPassword && <div className="invalid-feedback">{errors.confirmNewPassword.message}</div>}
-        </div>
-        <button type="submit" className="btn btn-primary w-100" disabled={isSubmitting}>
-          {isSubmitting ? 'Đang xử lý...' : 'Đặt lại mật khẩu'}
-        </button>
+      )}
+
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
+        <Input
+          id="newPassword"
+          label="Mật khẩu mới"
+          type="password"
+          leftIcon={<Lock size={18} />}
+          placeholder="Tối thiểu 8 ký tự"
+          hint="Ít nhất 8 ký tự, có cả chữ và số"
+          error={errors.newPassword?.message}
+          {...register('newPassword', {
+            required: 'Password mới không được để trống',
+            pattern: { value: PASSWORD_PATTERN, message: 'Password phải từ 8 ký tự trở lên, có ít nhất 1 chữ và 1 số' },
+          })}
+        />
+        <Input
+          id="confirmNewPassword"
+          label="Xác nhận mật khẩu mới"
+          type="password"
+          leftIcon={<Lock size={18} />}
+          placeholder="Nhập lại mật khẩu mới"
+          error={errors.confirmNewPassword?.message}
+          {...register('confirmNewPassword', {
+            required: 'Confirm password mới không được để trống',
+            validate: (value) => value === newPassword || 'Confirm password mới không khớp với password mới',
+          })}
+        />
+        <Button type="submit" fullWidth isLoading={isSubmitting}>
+          Đặt lại mật khẩu
+        </Button>
       </form>
     </div>
   )

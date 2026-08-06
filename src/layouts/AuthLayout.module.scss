@@ -1,0 +1,163 @@
+@use '../styles/variables' as v;
+
+.wrapper {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 4fr);
+  min-height: 100svh;
+
+  @media (max-width: v.$breakpoint-lg) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ── Panel trái: branding / value proposition ─────────────────────────────
+.brandPanel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: v.$space-8 v.$space-12;
+  overflow: hidden;
+  background: linear-gradient(155deg, var(--dl-primary-600) 0%, var(--dl-primary-500) 45%, var(--dl-secondary-600) 100%);
+  color: #fff;
+
+  @media (max-width: v.$breakpoint-lg) {
+    display: none;
+  }
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.35;
+  background: #fff;
+  pointer-events: none;
+}
+
+.blob1 {
+  width: 320px;
+  height: 320px;
+  top: -80px;
+  right: -100px;
+}
+
+.blob2 {
+  width: 260px;
+  height: 260px;
+  bottom: -60px;
+  left: -60px;
+  background: var(--dl-accent-300);
+  opacity: 0.3;
+}
+
+.brandContent {
+  position: relative;
+  z-index: 1;
+  max-width: 440px;
+  margin-top: v.$space-16;
+}
+
+.brandTitle {
+  font-size: v.$font-size-4xl;
+  font-weight: v.$font-weight-extrabold;
+  line-height: v.$line-height-tight;
+  letter-spacing: -0.03em;
+  margin-bottom: v.$space-4;
+}
+
+.brandSubtitle {
+  font-size: v.$font-size-md;
+  color: rgb(255 255 255 / 88%);
+  line-height: v.$line-height-relaxed;
+  margin-bottom: v.$space-8;
+}
+
+.featureList {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-4;
+  position: relative;
+  z-index: 1;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: v.$space-3;
+  font-size: v.$font-size-sm;
+  color: rgb(255 255 255 / 92%);
+}
+
+.featureIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: v.$radius-sm;
+  background: rgb(255 255 255 / 16%);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgb(255 255 255 / 20%);
+}
+
+.brandFooter {
+  position: relative;
+  z-index: 1;
+  font-size: v.$font-size-xs;
+  color: rgb(255 255 255 / 70%);
+}
+
+// ── Panel phải: form ──────────────────────────────────────────────────
+.formPanel {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--dl-bg);
+}
+
+.formTopbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: v.$space-6 v.$space-8;
+
+  @media (max-width: v.$breakpoint-sm) {
+    padding: v.$space-4;
+  }
+}
+
+.formContent {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: v.$space-4 v.$space-8 v.$space-12;
+
+  @media (max-width: v.$breakpoint-sm) {
+    padding: v.$space-2 v.$space-4 v.$space-8;
+  }
+}
+
+.formInner {
+  width: 100%;
+  max-width: 400px;
+  animation: rise 420ms v.$ease-standard;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .formInner {
+    animation: none;
+  }
+}

@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
+import { CheckCircle2, TriangleAlert } from 'lucide-react'
 import authService from '../../services/authService'
 import { getApiErrorMessage } from '../../api/apiError'
+import { ButtonLink, Spinner } from '../../components/ui'
+import styles from './AuthForm.module.scss'
 
 type VerifyStatus = 'verifying' | 'success' | 'error'
 
@@ -41,41 +44,53 @@ function VerifyEmailPage() {
 
   if (!token) {
     return (
-      <div className="container py-5" style={{ maxWidth: 420 }}>
-        <h1 className="h3 mb-4">Xác thực email</h1>
-        <div className="alert alert-danger">Link xác thực không hợp lệ - thiếu token.</div>
-        <Link to="/login" className="btn btn-outline-secondary">
+      <div className={styles.successState}>
+        <span className={styles.errorIcon}>
+          <TriangleAlert size={32} />
+        </span>
+        <h1 className={styles.successTitle}>Link không hợp lệ</h1>
+        <p className={styles.successText}>Link xác thực không hợp lệ hoặc thiếu token.</p>
+        <ButtonLink to="/login" variant="outline" fullWidth>
           Về trang đăng nhập
-        </Link>
+        </ButtonLink>
+      </div>
+    )
+  }
+
+  if (status === 'verifying') {
+    return (
+      <div className={styles.verifyingState}>
+        <Spinner size="lg" />
+        <span>Đang xác thực email...</span>
+      </div>
+    )
+  }
+
+  if (status === 'success') {
+    return (
+      <div className={styles.successState}>
+        <span className={styles.successIcon}>
+          <CheckCircle2 size={32} />
+        </span>
+        <h1 className={styles.successTitle}>Xác thực thành công</h1>
+        <p className={styles.successText}>Email của bạn đã được xác thực. Bạn có thể đăng nhập ngay bây giờ.</p>
+        <ButtonLink to="/login" fullWidth>
+          Đăng nhập
+        </ButtonLink>
       </div>
     )
   }
 
   return (
-    <div className="container py-5" style={{ maxWidth: 420 }}>
-      <h1 className="h3 mb-4">Xác thực email</h1>
-      {status === 'verifying' && (
-        <div className="d-flex align-items-center gap-2">
-          <div className="spinner-border spinner-border-sm" role="status" />
-          <span>Đang xác thực...</span>
-        </div>
-      )}
-      {status === 'success' && (
-        <>
-          <div className="alert alert-success">Xác thực email thành công. Bạn có thể đăng nhập ngay bây giờ.</div>
-          <Link to="/login" className="btn btn-primary">
-            Đăng nhập
-          </Link>
-        </>
-      )}
-      {status === 'error' && (
-        <>
-          <div className="alert alert-danger">{errorMessage}</div>
-          <Link to="/login" className="btn btn-outline-secondary">
-            Về trang đăng nhập
-          </Link>
-        </>
-      )}
+    <div className={styles.successState}>
+      <span className={styles.errorIcon}>
+        <TriangleAlert size={32} />
+      </span>
+      <h1 className={styles.successTitle}>Xác thực thất bại</h1>
+      <p className={styles.successText}>{errorMessage}</p>
+      <ButtonLink to="/login" variant="outline" fullWidth>
+        Về trang đăng nhập
+      </ButtonLink>
     </div>
   )
 }

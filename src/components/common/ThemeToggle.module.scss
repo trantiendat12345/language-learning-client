@@ -1,0 +1,51 @@
+@use '../../styles/variables' as v;
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: v.$radius-full;
+  border: 1px solid var(--dl-border);
+  background-color: var(--dl-surface);
+  color: var(--dl-text-secondary);
+  cursor: pointer;
+  transition:
+    background-color v.$transition-fast v.$ease-standard,
+    color v.$transition-fast v.$ease-standard,
+    transform v.$transition-fast v.$ease-bounce,
+    border-color v.$transition-fast v.$ease-standard;
+
+  &:hover {
+    color: var(--dl-text-primary);
+    border-color: var(--dl-border-strong);
+    transform: rotate(-12deg);
+  }
+}
+
+.inverse {
+  background-color: rgb(255 255 255 / 12%);
+  border-color: rgb(255 255 255 / 20%);
+  color: #fff;
+
+  &:hover {
+    background-color: rgb(255 255 255 / 20%);
+    color: #fff;
+  }
+}
+
+.icon {
+  animation: pop 260ms v.$ease-bounce;
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.5) rotate(-30deg);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+  }
+}

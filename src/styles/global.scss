@@ -1,0 +1,120 @@
+@use 'variables' as v;
+@import 'theme';
+@import 'bootstrap';
+
+// ── Font: Inter (nạp qua index.html <link>, đây chỉ khai báo fallback stack) ─
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: v.$font-family-base;
+  font-size: v.$font-size-base;
+  font-weight: v.$font-weight-regular;
+  line-height: v.$line-height-normal;
+  color: var(--dl-text-primary);
+  background-color: var(--dl-bg);
+  transition:
+    background-color v.$transition-base v.$ease-standard,
+    color v.$transition-base v.$ease-standard;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+#root {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+// ── Typography base ────────────────────────────────────────────────────
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: v.$font-weight-bold;
+  line-height: v.$line-height-tight;
+  color: var(--dl-text-primary);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+h1 {
+  font-size: v.$font-size-4xl;
+}
+h2 {
+  font-size: v.$font-size-3xl;
+}
+h3 {
+  font-size: v.$font-size-2xl;
+}
+h4 {
+  font-size: v.$font-size-xl;
+}
+h5 {
+  font-size: v.$font-size-lg;
+}
+h6 {
+  font-size: v.$font-size-md;
+}
+
+p {
+  margin: 0;
+  color: var(--dl-text-secondary);
+}
+
+a {
+  color: var(--dl-text-link);
+  text-decoration: none;
+  transition: color v.$transition-fast v.$ease-standard;
+
+  &:hover {
+    color: var(--dl-primary-600);
+  }
+}
+
+// ── Focus state đồng bộ cho toàn site (accessibility - CLAUDE.md yêu cầu) ──
+:focus-visible {
+  outline: 2px solid var(--dl-primary-500);
+  outline-offset: 2px;
+  border-radius: v.$radius-sm;
+}
+
+// ── Scrollbar mảnh, hợp tông (không bắt buộc nhưng tăng cảm giác premium) ──
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--dl-border-strong) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--dl-border-strong);
+  border-radius: v.$radius-full;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+// ── Selection màu thương hiệu thay vì xanh mặc định trình duyệt ──────────
+::selection {
+  background-color: var(--dl-primary-200);
+  color: var(--dl-gray-900);
+}
+
+img,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+}

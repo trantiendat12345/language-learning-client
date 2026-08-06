@@ -1,0 +1,41 @@
+@use '../../styles/variables' as v;
+
+.card {
+  background-color: var(--dl-card);
+  border: 1px solid var(--dl-border);
+  border-radius: v.$radius-lg;
+  box-shadow: var(--dl-shadow-sm);
+  transition:
+    transform v.$transition-base v.$ease-standard,
+    box-shadow v.$transition-base v.$ease-standard,
+    border-color v.$transition-base v.$ease-standard;
+}
+
+.hoverable {
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--dl-shadow-hover);
+    border-color: var(--dl-border-strong);
+  }
+}
+
+.none {
+  padding: 0;
+}
+.sm {
+  padding: v.$space-4;
+}
+.md {
+  padding: v.$space-6;
+}
+.lg {
+  padding: v.$space-8;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+}

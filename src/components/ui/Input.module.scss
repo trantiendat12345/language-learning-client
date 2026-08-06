@@ -1,0 +1,111 @@
+@use '../../styles/variables' as v;
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-2;
+  width: 100%;
+}
+
+.label {
+  font-size: v.$font-size-sm;
+  font-weight: v.$font-weight-medium;
+  color: var(--dl-text-primary);
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+  height: 48px;
+  padding: 0 v.$space-4;
+  font-family: v.$font-family-base;
+  font-size: v.$font-size-base;
+  color: var(--dl-text-primary);
+  background-color: var(--dl-surface);
+  border: 1.5px solid var(--dl-border);
+  border-radius: v.$radius-sm;
+  transition:
+    border-color v.$transition-fast v.$ease-standard,
+    box-shadow v.$transition-fast v.$ease-standard,
+    background-color v.$transition-fast v.$ease-standard;
+
+  &::placeholder {
+    color: var(--dl-text-tertiary);
+  }
+
+  &:hover {
+    border-color: var(--dl-border-strong);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--dl-primary-500);
+    box-shadow: var(--dl-shadow-focus);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.withLeftIcon {
+  padding-left: 44px;
+}
+
+.withRightSlot {
+  padding-right: 44px;
+}
+
+.leftIcon {
+  position: absolute;
+  left: v.$space-4;
+  display: flex;
+  align-items: center;
+  color: var(--dl-text-tertiary);
+  pointer-events: none;
+}
+
+.togglePassword {
+  position: absolute;
+  right: v.$space-3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--dl-text-tertiary);
+  cursor: pointer;
+  border-radius: v.$radius-sm;
+  transition: color v.$transition-fast v.$ease-standard;
+
+  &:hover {
+    color: var(--dl-text-primary);
+  }
+}
+
+.hasError .input {
+  border-color: var(--dl-danger-500);
+
+  &:focus {
+    box-shadow: 0 0 0 3px var(--dl-danger-50);
+  }
+}
+
+.errorText {
+  font-size: v.$font-size-xs;
+  color: var(--dl-danger-600);
+}
+
+.hintText {
+  font-size: v.$font-size-xs;
+  color: var(--dl-text-tertiary);
+}

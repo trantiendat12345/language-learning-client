@@ -1,0 +1,40 @@
+@use '../../styles/variables' as v;
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: v.$space-2;
+  font-weight: v.$font-weight-extrabold;
+  font-size: v.$font-size-lg;
+  color: var(--dl-text-primary);
+  letter-spacing: -0.02em;
+
+  &:hover {
+    color: var(--dl-text-primary);
+  }
+}
+
+.mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: v.$radius-sm;
+  background: linear-gradient(135deg, var(--dl-primary-500), var(--dl-secondary-500));
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.inverse {
+  color: #fff;
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+.inverse .mark {
+  background: rgb(255 255 255 / 18%);
+  backdrop-filter: blur(8px);
+}

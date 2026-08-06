@@ -1,0 +1,123 @@
+// Token có màu, đổi được lúc runtime theo theme — dùng CSS custom property (không phải SCSS
+// variable) vì cần switch light/dark bằng cách đổi attribute `data-bs-theme` trên <html>, không
+// build lại CSS. Dùng chung attribute với Bootstrap 5.3 color mode để 1 lần toggle áp dụng cho
+// cả 2 hệ thống (custom component của mình + phần còn dùng biến --bs-* của Bootstrap).
+//
+// Bảng màu: primary xanh lá (học tập/growth, tinh thần Duolingo), secondary chàm (Linear/Quizlet),
+// accent vàng hổ phách (streak/XP/gamification). Nền tối kiểu Linear (xám xanh đậm, không đen
+// tuyệt đối) để đỡ chói mắt hơn "true black".
+
+:root {
+  // Primary - emerald green
+  --dl-primary-50: #ecfdf5;
+  --dl-primary-100: #d1fae5;
+  --dl-primary-200: #a7f3d0;
+  --dl-primary-300: #6ee7b7;
+  --dl-primary-400: #34d399;
+  --dl-primary-500: #10b981;
+  --dl-primary-600: #059669;
+  --dl-primary-700: #047857;
+  --dl-primary-contrast: #ffffff;
+
+  // Secondary - indigo
+  --dl-secondary-50: #eef2ff;
+  --dl-secondary-100: #e0e7ff;
+  --dl-secondary-300: #a5b4fc;
+  --dl-secondary-500: #6366f1;
+  --dl-secondary-600: #4f46e5;
+  --dl-secondary-700: #4338ca;
+  --dl-secondary-contrast: #ffffff;
+
+  // Accent - amber (streak/XP/gamification highlight)
+  --dl-accent-50: #fffbeb;
+  --dl-accent-100: #fef3c7;
+  --dl-accent-300: #fcd34d;
+  --dl-accent-500: #f59e0b;
+  --dl-accent-600: #d97706;
+  --dl-accent-contrast: #1f2937;
+
+  // Semantic
+  --dl-success-50: #ecfdf5;
+  --dl-success-500: #22c55e;
+  --dl-success-600: #16a34a;
+  --dl-warning-50: #fffbeb;
+  --dl-warning-500: #f59e0b;
+  --dl-warning-600: #d97706;
+  --dl-danger-50: #fef2f2;
+  --dl-danger-500: #ef4444;
+  --dl-danger-600: #dc2626;
+  --dl-info-50: #eff6ff;
+  --dl-info-500: #3b82f6;
+  --dl-info-600: #2563eb;
+
+  // Neutrals (đặt tên trung tính, không đổi theo theme - dùng để derive semantic bên dưới)
+  --dl-gray-0: #ffffff;
+  --dl-gray-50: #f8fafc;
+  --dl-gray-100: #f1f5f9;
+  --dl-gray-200: #e2e8f0;
+  --dl-gray-300: #cbd5e1;
+  --dl-gray-400: #94a3b8;
+  --dl-gray-500: #64748b;
+  --dl-gray-600: #475569;
+  --dl-gray-700: #334155;
+  --dl-gray-800: #1e293b;
+  --dl-gray-900: #0f172a;
+  --dl-gray-950: #060a14;
+
+  // ── Semantic (light mode mặc định) ────────────────────────────────────
+  --dl-bg: var(--dl-gray-50);
+  --dl-surface: #ffffff;
+  --dl-card: #ffffff;
+  --dl-card-hover: var(--dl-gray-50);
+  --dl-border: var(--dl-gray-200);
+  --dl-border-strong: var(--dl-gray-300);
+
+  --dl-text-primary: var(--dl-gray-900);
+  --dl-text-secondary: var(--dl-gray-500);
+  --dl-text-tertiary: var(--dl-gray-400);
+  --dl-text-on-primary: #ffffff;
+  --dl-text-link: var(--dl-secondary-600);
+
+  --dl-overlay: rgb(15 23 42 / 45%);
+
+  // Shadow - nhẹ ở light mode, dựa trên gray-900 mờ
+  --dl-shadow-sm: 0 1px 2px rgb(15 23 42 / 6%);
+  --dl-shadow-md: 0 4px 10px rgb(15 23 42 / 7%), 0 2px 4px rgb(15 23 42 / 5%);
+  --dl-shadow-lg: 0 16px 32px rgb(15 23 42 / 10%), 0 4px 8px rgb(15 23 42 / 5%);
+  --dl-shadow-hover: 0 20px 40px rgb(15 23 42 / 12%), 0 6px 12px rgb(15 23 42 / 6%);
+  --dl-shadow-focus: 0 0 0 3px var(--dl-primary-100);
+
+  // Glass effect (dùng ở Navbar sticky, hero...)
+  --dl-glass-bg: rgb(255 255 255 / 72%);
+  --dl-glass-border: rgb(255 255 255 / 40%);
+
+  color-scheme: light;
+}
+
+[data-bs-theme='dark'] {
+  --dl-bg: var(--dl-gray-950);
+  --dl-surface: #0d121e;
+  --dl-card: #131826;
+  --dl-card-hover: #171d2d;
+  --dl-border: #232a3b;
+  --dl-border-strong: #2f374a;
+
+  --dl-text-primary: #f1f5f9;
+  --dl-text-secondary: #94a3b8;
+  --dl-text-tertiary: #64748b;
+  --dl-text-on-primary: #ffffff;
+  --dl-text-link: var(--dl-secondary-300);
+
+  --dl-overlay: rgb(2 6 16 / 65%);
+
+  --dl-shadow-sm: 0 1px 2px rgb(0 0 0 / 30%);
+  --dl-shadow-md: 0 4px 12px rgb(0 0 0 / 35%), 0 2px 4px rgb(0 0 0 / 25%);
+  --dl-shadow-lg: 0 20px 40px rgb(0 0 0 / 45%), 0 4px 10px rgb(0 0 0 / 30%);
+  --dl-shadow-hover: 0 24px 48px rgb(0 0 0 / 50%), 0 8px 16px rgb(0 0 0 / 35%);
+  --dl-shadow-focus: 0 0 0 3px rgb(16 185 129 / 30%);
+
+  --dl-glass-bg: rgb(13 18 30 / 72%);
+  --dl-glass-border: rgb(255 255 255 / 8%);
+
+  color-scheme: dark;
+}

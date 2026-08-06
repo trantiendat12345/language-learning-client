@@ -4,9 +4,27 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>language-learning-client</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..800;1,14..32,400..800&display=swap"
+      rel="stylesheet"
+    />
+    <title>Language Learning</title>
   </head>
   <body>
+    <script>
+      // Set theme TRƯỚC khi React mount để tránh nháy sai theme (FOUC) - đồng bộ logic với
+      // getInitialTheme() ở src/contexts/ThemeContext.tsx, không tách ra 1 file dùng chung được
+      // vì đây phải chạy trước khi bundle JS tải xong.
+      (function () {
+        var stored = localStorage.getItem('theme')
+        var theme = stored === 'light' || stored === 'dark'
+          ? stored
+          : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+        document.documentElement.setAttribute('data-bs-theme', theme)
+      })()
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
