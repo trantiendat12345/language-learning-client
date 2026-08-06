@@ -1,0 +1,69 @@
+@use '../../styles/variables' as v;
+
+.page {
+  padding: v.$space-8 0 v.$space-16;
+}
+
+.header {
+  margin-bottom: v.$space-8;
+}
+
+.subtitle {
+  color: var(--dl-text-secondary);
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr) auto;
+  gap: v.$space-3;
+  align-items: end;
+  margin-bottom: v.$space-8;
+
+  @media (max-width: v.$breakpoint-md) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: v.$breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.filterButton {
+  height: 48px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: v.$space-6;
+  margin-bottom: v.$space-8;
+
+  @media (max-width: v.$breakpoint-lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: v.$breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: v.$space-16 v.$space-4;
+  color: var(--dl-text-secondary);
+}
+
+.emptyIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: v.$radius-full;
+  background-color: var(--dl-card-hover);
+  color: var(--dl-text-tertiary);
+  margin-bottom: v.$space-4;
+}

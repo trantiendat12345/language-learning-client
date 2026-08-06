@@ -1,0 +1,55 @@
+@use '../../styles/variables' as v;
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-2;
+  width: 100%;
+}
+
+.label {
+  font-size: v.$font-size-sm;
+  font-weight: v.$font-weight-medium;
+  color: var(--dl-text-primary);
+}
+
+.wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.select {
+  width: 100%;
+  height: 48px;
+  padding: 0 40px 0 v.$space-4;
+  font-family: v.$font-family-base;
+  font-size: v.$font-size-base;
+  color: var(--dl-text-primary);
+  background-color: var(--dl-surface);
+  border: 1.5px solid var(--dl-border);
+  border-radius: v.$radius-sm;
+  appearance: none;
+  cursor: pointer;
+  transition:
+    border-color v.$transition-fast v.$ease-standard,
+    box-shadow v.$transition-fast v.$ease-standard;
+
+  &:hover {
+    border-color: var(--dl-border-strong);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--dl-primary-500);
+    box-shadow: var(--dl-shadow-focus);
+  }
+}
+
+.chevron {
+  position: absolute;
+  right: v.$space-4;
+  display: flex;
+  color: var(--dl-text-tertiary);
+  pointer-events: none;
+}

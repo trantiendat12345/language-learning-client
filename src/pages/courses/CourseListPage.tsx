@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { AlertCircle, Search, SearchX, SlidersHorizontal } from 'lucide-react'
 import courseService from '../../services/courseService'
 import languageService from '../../services/languageService'
 import { getApiErrorMessage } from '../../api/apiError'
+import { Button, Input, Pagination, Select } from '../../components/ui'
+import CourseCard from '../../components/courses/CourseCard'
+import CourseCardSkeleton from '../../components/courses/CourseCardSkeleton'
 import type { CourseSummaryResponse } from '../../types/course'
 import type { LanguageResponse } from '../../types/language'
+import styles from './CourseListPage.module.scss'
 
 interface CourseFilterForm {
   keyword: string
@@ -67,86 +71,61 @@ function CourseListPage() {
   }
 
   return (
-    <div className="container py-5">
-      <h1 className="h3 mb-4">Khoá học</h1>
+    <div className={`container ${styles.page}`}>
+      <div className={styles.header}>
+        <h1>Khoá học</h1>
+        <p className={styles.subtitle}>Khám phá thư viện khoá học và bắt đầu hành trình học tiếng Anh của bạn</p>
+      </div>
 
-      <form className="row g-2 mb-4" onSubmit={handleSubmit(onSubmit)}>
-        <div className="col-md-4">
-          <input className="form-control" placeholder="Tìm theo tên khoá học..." {...register('keyword')} />
-        </div>
-        <div className="col-md-3">
-          <select className="form-select" {...register('languageId')}>
-            <option value="">Tất cả ngôn ngữ</option>
-            {languages.map((language) => (
-              <option key={language.id} value={language.id}>
-                {language.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="col-md-3">
-          <input className="form-control" placeholder="Trình độ (vd A1, B2...)" {...register('level')} />
-        </div>
-        <div className="col-md-2">
-          <button type="submit" className="btn btn-primary w-100">
-            Tìm kiếm
-          </button>
-        </div>
+      <form className={styles.filters} onSubmit={handleSubmit(onSubmit)}>
+        <Input placeholder="Tìm theo tên khoá học..." leftIcon={<Search size={17} />} {...register('keyword')} />
+        <Select {...register('languageId')}>
+          <option value="">Tất cả ngôn ngữ</option>
+          {languages.map((language) => (
+            <option key={language.id} value={language.id}>
+              {language.name}
+            </option>
+          ))}
+        </Select>
+        <Input placeholder="Trình độ (vd A1, B2...)" {...register('level')} />
+        <Button type="submit" className={styles.filterButton} leftIcon={<SlidersHorizontal size={16} />}>
+          Lọc
+        </Button>
       </form>
 
-      {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
-
-      {isLoading ? (
-        <div className="d-flex justify-content-center py-5">
-          <div className="spinner-border" role="status" />
+      {errorMessage && (
+        <div className={`${styles.empty}`} role="alert">
+          <span className={styles.emptyIcon}>
+            <AlertCircle size={26} />
+          </span>
+          <p>{errorMessage}</p>
         </div>
-      ) : courses.length === 0 ? (
-        <p className="text-muted">Không tìm thấy khoá học nào.</p>
-      ) : (
-        <>
-          <div className="row g-4">
-            {courses.map((course) => (
-              <div className="col-md-4" key={course.id}>
-                <Link to={`/courses/${course.id}`} className="text-decoration-none text-body">
-                  <div className="card h-100">
-                    {course.thumbnailUrl && (
-                      <img src={course.thumbnailUrl} className="card-img-top" alt={course.title} />
-                    )}
-                    <div className="card-body">
-                      <h2 className="h5 card-title">{course.title}</h2>
-                      <p className="card-text text-muted mb-1">{course.languageCode.toUpperCase()}</p>
-                      {course.difficulty && <span className="badge bg-secondary me-1">{course.difficulty}</span>}
-                      {course.estimatedMinutes != null && (
-                        <span className="badge bg-light text-dark">{course.estimatedMinutes} phút</span>
-                      )}
-                    </div>
-                  </div>
-                </Link>
-              </div>
-            ))}
-          </div>
+      )}
 
-          {totalPages > 1 && (
-            <nav className="mt-4">
-              <ul className="pagination justify-content-center">
-                <li className={`page-item ${page === 0 ? 'disabled' : ''}`}>
-                  <button type="button" className="page-link" onClick={() => setPage((p) => p - 1)}>
-                    Trước
-                  </button>
-                </li>
-                <li className="page-item disabled">
-                  <span className="page-link">
-                    Trang {page + 1}/{totalPages}
-                  </span>
-                </li>
-                <li className={`page-item ${page + 1 >= totalPages ? 'disabled' : ''}`}>
-                  <button type="button" className="page-link" onClick={() => setPage((p) => p + 1)}>
-                    Sau
-                  </button>
-                </li>
-              </ul>
-            </nav>
+      {!errorMessage && (
+        <>
+          {isLoading ? (
+            <div className={styles.grid}>
+              {Array.from({ length: 6 }).map((_, index) => (
+                <CourseCardSkeleton key={index} />
+              ))}
+            </div>
+          ) : courses.length === 0 ? (
+            <div className={styles.empty}>
+              <span className={styles.emptyIcon}>
+                <SearchX size={26} />
+              </span>
+              <p>Không tìm thấy khoá học nào phù hợp với bộ lọc hiện tại.</p>
+            </div>
+          ) : (
+            <div className={styles.grid}>
+              {courses.map((course) => (
+                <CourseCard course={course} key={course.id} />
+              ))}
+            </div>
           )}
+
+          <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
         </>
       )}
     </div>

@@ -1,0 +1,39 @@
+@use '../../styles/variables' as v;
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px v.$space-3;
+  border-radius: v.$radius-full;
+  font-size: v.$font-size-xs;
+  font-weight: v.$font-weight-semibold;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+.neutral {
+  background-color: var(--dl-card-hover);
+  color: var(--dl-text-secondary);
+  border: 1px solid var(--dl-border);
+}
+
+.primary {
+  background-color: var(--dl-primary-50);
+  color: var(--dl-primary-600);
+}
+
+.secondary {
+  background-color: var(--dl-secondary-50);
+  color: var(--dl-secondary-600);
+}
+
+.accent {
+  background-color: var(--dl-accent-50);
+  color: var(--dl-accent-600);
+}
+
+.success {
+  background-color: var(--dl-success-50);
+  color: var(--dl-success-600);
+}

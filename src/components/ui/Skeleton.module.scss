@@ -1,0 +1,39 @@
+@use '../../styles/variables' as v;
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--dl-card-hover);
+  border-radius: v.$radius-sm;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgb(255 255 255 / 35%), transparent);
+    animation: shimmer 1.5s infinite;
+  }
+}
+
+[data-bs-theme='dark'] .skeleton::after {
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 8%), transparent);
+}
+
+.circle {
+  border-radius: v.$radius-full;
+}
+
+@keyframes shimmer {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton::after {
+    animation: none;
+  }
+}
