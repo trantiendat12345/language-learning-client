@@ -17,3 +17,13 @@ export interface ApiErrorResponse {
   message: string
   errors: FieldError[] | null
 }
+
+// Khớp common/dto/PageResponse.java ở Backend - bọc trong ApiResponse<PageResponse<T>> cho mọi API danh sách.
+export interface PageResponse<T> {
+  content: T[]
+  page: number
+  size: number
+  totalElements: number
+  totalPages: number
+  last: boolean
+}

@@ -16,6 +16,9 @@ function Navbar() {
         <Link className="navbar-brand" to="/">
           Language Learning
         </Link>
+        <Link to="/courses" className="nav-link d-inline">
+          Khoá học
+        </Link>
         <div className="d-flex align-items-center gap-3 ms-auto">
           {user ? (
             <>
