@@ -27,7 +27,7 @@ function RegisterPage() {
     setServerError(null)
     try {
       await registerUser(data)
-      setSuccessMessage('Đăng ký thành công! Vui lòng kiểm tra email để xác thực tài khoản trước khi đăng nhập.')
+      setSuccessMessage('Đăng ký thành công! Bạn có thể đăng nhập ngay.')
     } catch (error) {
       setServerError(getApiErrorMessage(error))
     }
