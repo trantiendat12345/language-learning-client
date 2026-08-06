@@ -1,0 +1,55 @@
+@use '../../styles/variables' as v;
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: v.$space-6;
+}
+
+.chart {
+  display: flex;
+  align-items: flex-end;
+  gap: v.$space-3;
+  height: 140px;
+}
+
+.col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: v.$space-2;
+  height: 100%;
+}
+
+.barTrack {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  max-width: 32px;
+}
+
+.bar {
+  width: 100%;
+  border-radius: v.$radius-sm v.$radius-sm 0 0;
+  background: linear-gradient(180deg, var(--dl-primary-400), var(--dl-primary-600));
+  transition: height v.$transition-slow v.$ease-bounce;
+  min-height: 4px;
+}
+
+.barToday {
+  background: linear-gradient(180deg, var(--dl-accent-300), var(--dl-accent-500));
+}
+
+.dayLabel {
+  font-size: v.$font-size-xs;
+  color: var(--dl-text-tertiary);
+  font-weight: v.$font-weight-medium;
+}
+
+.minutesLabel {
+  font-size: v.$font-size-xs;
+  color: var(--dl-text-secondary);
+}

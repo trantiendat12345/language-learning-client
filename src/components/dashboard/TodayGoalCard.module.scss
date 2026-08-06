@@ -1,0 +1,61 @@
+@use '../../styles/variables' as v;
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: v.$space-6;
+
+  @media (max-width: v.$breakpoint-sm) {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.ringContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ringValue {
+  font-size: v.$font-size-lg;
+  font-weight: v.$font-weight-extrabold;
+  color: var(--dl-text-primary);
+}
+
+.ringLabel {
+  font-size: v.$font-size-xs;
+  color: var(--dl-text-tertiary);
+}
+
+.body {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: v.$space-2;
+  margin-bottom: v.$space-1;
+
+  @media (max-width: v.$breakpoint-sm) {
+    justify-content: center;
+  }
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: v.$space-1;
+  padding: 2px v.$space-2;
+  border-radius: v.$radius-full;
+  background-color: var(--dl-success-50);
+  color: var(--dl-success-600);
+  font-size: v.$font-size-xs;
+  font-weight: v.$font-weight-semibold;
+}
+
+.subtitle {
+  margin-bottom: v.$space-4;
+}

@@ -1,0 +1,66 @@
+@use '../../styles/variables' as v;
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: v.$space-4;
+}
+
+.comingSoon {
+  font-size: v.$font-size-xs;
+  color: var(--dl-text-tertiary);
+  font-weight: v.$font-weight-medium;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-3;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: v.$space-3;
+}
+
+.rank {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: v.$radius-full;
+  font-size: v.$font-size-xs;
+  font-weight: v.$font-weight-bold;
+  background-color: var(--dl-card-hover);
+  color: var(--dl-text-secondary);
+}
+
+.rank1 {
+  background: linear-gradient(135deg, #fde68a, #f59e0b);
+  color: #7c2d12;
+}
+.rank2 {
+  background: linear-gradient(135deg, #e5e7eb, #9ca3af);
+  color: #1f2937;
+}
+.rank3 {
+  background: linear-gradient(135deg, #fdba74, #c2410c);
+  color: #fff;
+}
+
+.name {
+  flex: 1;
+  font-size: v.$font-size-sm;
+  font-weight: v.$font-weight-medium;
+  color: var(--dl-text-primary);
+}
+
+.xp {
+  font-size: v.$font-size-sm;
+  font-weight: v.$font-weight-semibold;
+  color: var(--dl-primary-600);
+}

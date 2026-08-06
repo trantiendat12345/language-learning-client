@@ -1,0 +1,32 @@
+@use '../../styles/variables' as v;
+
+.wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.svg {
+  transform: rotate(-90deg);
+}
+
+.track {
+  fill: none;
+  stroke: var(--dl-border);
+}
+
+.progress {
+  fill: none;
+  stroke-linecap: round;
+  transition: stroke-dashoffset v.$transition-slow v.$ease-standard;
+}
+
+.content {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}

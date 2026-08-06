@@ -1,0 +1,29 @@
+@use '../../styles/variables' as v;
+
+.tile {
+  display: flex;
+  align-items: center;
+  gap: v.$space-4;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: v.$radius-md;
+}
+
+.value {
+  font-size: v.$font-size-xl;
+  font-weight: v.$font-weight-extrabold;
+  color: var(--dl-text-primary);
+  line-height: v.$line-height-tight;
+}
+
+.label {
+  font-size: v.$font-size-sm;
+  color: var(--dl-text-secondary);
+}

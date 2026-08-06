@@ -1,0 +1,64 @@
+@use '../../styles/variables' as v;
+
+.header {
+  margin-bottom: v.$space-4;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: v.$space-3;
+  padding: v.$space-3 0;
+  border-bottom: 1px solid var(--dl-border);
+
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  &:first-child {
+    padding-top: 0;
+  }
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: v.$radius-full;
+  background-color: var(--dl-primary-50);
+  color: var(--dl-primary-600);
+}
+
+.body {
+  flex: 1;
+  min-width: 0;
+}
+
+.text {
+  font-size: v.$font-size-sm;
+  color: var(--dl-text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.time {
+  font-size: v.$font-size-xs;
+  color: var(--dl-text-tertiary);
+}
+
+.empty {
+  text-align: center;
+  color: var(--dl-text-secondary);
+  padding: v.$space-8 0;
+  font-size: v.$font-size-sm;
+}

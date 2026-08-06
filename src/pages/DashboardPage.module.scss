@@ -1,0 +1,59 @@
+@use '../styles/variables' as v;
+
+.page {
+  padding: v.$space-8 0 v.$space-16;
+}
+
+.header {
+  margin-bottom: v.$space-8;
+}
+
+.greeting {
+  margin-bottom: v.$space-1;
+}
+
+.subGreeting {
+  color: var(--dl-text-secondary);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: v.$space-4;
+  margin-bottom: v.$space-6;
+
+  @media (max-width: v.$breakpoint-lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: v.$space-6;
+
+  @media (max-width: v.$breakpoint-lg) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-6;
+  min-width: 0;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-6;
+  min-width: 0;
+}
+
+.loadingState {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+}

@@ -1,0 +1,77 @@
+@use '../../styles/variables' as v;
+
+.card {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--dl-secondary-600), var(--dl-secondary-500) 60%, var(--dl-primary-500));
+  color: #fff;
+  border: none;
+}
+
+.blob {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 12%);
+  pointer-events: none;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: v.$space-2;
+  font-size: v.$font-size-xs;
+  font-weight: v.$font-weight-semibold;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgb(255 255 255 / 80%);
+  margin-bottom: v.$space-2;
+  position: relative;
+}
+
+.courseTitle {
+  font-size: v.$font-size-lg;
+  font-weight: v.$font-weight-bold;
+  margin-bottom: v.$space-1;
+  position: relative;
+}
+
+.lessonTitle {
+  color: rgb(255 255 255 / 85%);
+  margin-bottom: v.$space-6;
+  position: relative;
+}
+
+.button {
+  position: relative;
+  background-color: #fff;
+  color: var(--dl-secondary-600);
+
+  &:hover {
+    background-color: var(--dl-gray-50);
+  }
+}
+
+// ── Empty state (chưa enroll khoá nào) ───────────────────────────────────
+.empty {
+  text-align: center;
+}
+
+.emptyIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: v.$radius-full;
+  background-color: var(--dl-primary-50);
+  color: var(--dl-primary-600);
+  margin-bottom: v.$space-4;
+}
+
+.emptyText {
+  margin-bottom: v.$space-6;
+}
