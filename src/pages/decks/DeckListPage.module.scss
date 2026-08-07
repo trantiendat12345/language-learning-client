@@ -1,0 +1,124 @@
+@use '../../styles/variables' as v;
+
+.page {
+  padding: v.$space-8 0 v.$space-16;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: v.$space-4;
+  margin-bottom: v.$space-6;
+  flex-wrap: wrap;
+}
+
+.subtitle {
+  color: var(--dl-text-secondary);
+}
+
+// ── Create form ─────────────────────────────────────────────────────
+.createForm {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: v.$space-3;
+  padding: v.$space-6;
+  border-radius: v.$radius-lg;
+  background-color: var(--dl-card);
+  border: 1px solid var(--dl-border);
+  margin-bottom: v.$space-6;
+
+  @media (max-width: v.$breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.createSubmit {
+  align-self: end;
+}
+
+.createError {
+  grid-column: 1 / -1;
+  color: var(--dl-danger-600);
+  font-size: v.$font-size-sm;
+  margin: 0;
+}
+
+// ── Tabs ──────────────────────────────────────────────────────────────
+.tabs {
+  display: flex;
+  gap: v.$space-2;
+  border-bottom: 1px solid var(--dl-border);
+  margin-bottom: v.$space-6;
+}
+
+.tab {
+  padding: v.$space-3 v.$space-4;
+  font-weight: v.$font-weight-medium;
+  color: var(--dl-text-secondary);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: color v.$transition-fast v.$ease-standard;
+
+  &:hover {
+    color: var(--dl-text-primary);
+  }
+}
+
+.tabActive {
+  color: var(--dl-primary-600);
+  border-bottom-color: var(--dl-primary-600);
+}
+
+// ── Search ────────────────────────────────────────────────────────────
+.searchForm {
+  display: flex;
+  gap: v.$space-3;
+  margin-bottom: v.$space-6;
+  max-width: 480px;
+
+  > :first-child {
+    flex: 1;
+  }
+}
+
+// ── Grid ──────────────────────────────────────────────────────────────
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: v.$space-6;
+  margin-bottom: v.$space-8;
+
+  @media (max-width: v.$breakpoint-lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: v.$breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: v.$space-16 v.$space-4;
+  color: var(--dl-text-secondary);
+}
+
+.emptyIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: v.$radius-full;
+  background-color: var(--dl-card-hover);
+  color: var(--dl-text-tertiary);
+  margin-bottom: v.$space-4;
+}
+
+.emptyAction {
+  margin-top: v.$space-4;
+}

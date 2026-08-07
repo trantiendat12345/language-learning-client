@@ -18,6 +18,9 @@ import CourseListPage from '../pages/courses/CourseListPage'
 import CourseDetailPage from '../pages/courses/CourseDetailPage'
 import LessonDetailPage from '../pages/lessons/LessonDetailPage'
 import VocabularyLearningPage from '../pages/lessons/VocabularyLearningPage'
+import DeckListPage from '../pages/decks/DeckListPage'
+import DeckDetailPage from '../pages/decks/DeckDetailPage'
+import FlashcardPage from '../pages/decks/FlashcardPage'
 
 function AppRoutes() {
   return (
@@ -31,6 +34,9 @@ function AppRoutes() {
               <Route path="/courses/:id" element={<CourseDetailPage />} />
               <Route path="/lessons/:id" element={<LessonDetailPage />} />
               <Route path="/lessons/:id/vocabulary" element={<VocabularyLearningPage />} />
+              <Route path="/decks" element={<DeckListPage />} />
+              <Route path="/decks/:id" element={<DeckDetailPage />} />
+              <Route path="/decks/:id/flashcard" element={<FlashcardPage />} />
             </Route>
             <Route element={<AuthLayout />}>
               <Route path="/verify-email" element={<VerifyEmailPage />} />
