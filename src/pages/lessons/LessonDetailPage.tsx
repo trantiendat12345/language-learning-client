@@ -154,6 +154,11 @@ function LessonDetailPage() {
             Từ vựng
           </h2>
           <span className={styles.sectionCount}>{lesson.vocabularies.length}</span>
+          {lesson.enrolled && lesson.vocabularies.length > 0 && (
+            <ButtonLink to={`/lessons/${lesson.id}/vocabulary`} size="sm" variant="outline" className={styles.learnVocabButton}>
+              Học từ vựng
+            </ButtonLink>
+          )}
         </div>
         {lesson.vocabularies.length === 0 ? (
           <Card>

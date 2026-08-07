@@ -1,0 +1,234 @@
+@use '../../styles/variables' as v;
+
+.page {
+  padding: v.$space-6 0 v.$space-16;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: v.$space-2;
+  font-size: v.$font-size-sm;
+  font-weight: v.$font-weight-medium;
+  color: var(--dl-text-secondary);
+  margin-bottom: v.$space-6;
+
+  &:hover {
+    color: var(--dl-primary-600);
+  }
+}
+
+// ── Header ────────────────────────────────────────────────────────────
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: v.$space-4;
+  margin-bottom: v.$space-6;
+}
+
+.title {
+  margin-bottom: v.$space-1;
+}
+
+.subtitle {
+  color: var(--dl-text-secondary);
+  margin: 0;
+}
+
+.ringLabel {
+  font-size: v.$font-size-xs;
+  font-weight: v.$font-weight-bold;
+  color: var(--dl-text-primary);
+}
+
+// ── Gate banner (chưa đăng nhập / chưa ghi danh) ────────────────────────
+.gateBanner {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: v.$space-3;
+  padding: v.$space-4;
+  border-radius: v.$radius-sm;
+  background-color: var(--dl-warning-50);
+  color: var(--dl-warning-600);
+  font-size: v.$font-size-sm;
+
+  span {
+    flex: 1;
+    min-width: 200px;
+  }
+}
+
+.emptyState {
+  color: var(--dl-text-secondary);
+  text-align: center;
+  padding: v.$space-8 0;
+}
+
+// ── Word list ────────────────────────────────────────────────────────
+.wordList {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-4;
+}
+
+.wordCard {
+  display: flex;
+  gap: v.$space-4;
+}
+
+.wordImage {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  border-radius: v.$radius-sm;
+  object-fit: cover;
+  background-color: var(--dl-card-hover);
+}
+
+.wordImageFallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  border-radius: v.$radius-sm;
+  background: linear-gradient(135deg, var(--dl-primary-400), var(--dl-secondary-500));
+  color: #fff;
+}
+
+.wordBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.wordHeadRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: v.$space-2;
+  margin-bottom: v.$space-2;
+}
+
+.wordText {
+  font-size: v.$font-size-lg;
+  font-weight: v.$font-weight-bold;
+  color: var(--dl-text-primary);
+}
+
+.wordIpa {
+  font-size: v.$font-size-sm;
+  color: var(--dl-text-tertiary);
+}
+
+.playButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: v.$radius-full;
+  background-color: var(--dl-secondary-50);
+  color: var(--dl-secondary-600);
+  transition: transform v.$transition-fast v.$ease-standard;
+
+  &:hover {
+    transform: scale(1.08);
+  }
+}
+
+.wordMeaning {
+  color: var(--dl-text-secondary);
+  margin-bottom: v.$space-2;
+}
+
+.wordExample {
+  padding: v.$space-3;
+  border-left: 3px solid var(--dl-primary-300);
+  background-color: var(--dl-card-hover);
+  border-radius: 0 v.$radius-sm v.$radius-sm 0;
+  margin-bottom: v.$space-3;
+}
+
+.exampleText {
+  color: var(--dl-text-primary);
+  font-weight: v.$font-weight-medium;
+  margin: 0;
+}
+
+.exampleTranslation {
+  font-size: v.$font-size-sm;
+  color: var(--dl-text-secondary);
+  margin: 2px 0 0;
+}
+
+.wordAction {
+  display: flex;
+}
+
+.markError {
+  color: var(--dl-danger-600);
+  font-size: v.$font-size-sm;
+  margin-top: v.$space-3;
+}
+
+// ── Complete card ─────────────────────────────────────────────────────
+.completeCard {
+  text-align: center;
+  margin-top: v.$space-8;
+}
+
+.completeIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: v.$radius-full;
+  background-color: var(--dl-success-50);
+  color: var(--dl-success-600);
+  margin-bottom: v.$space-4;
+  animation: pop-in 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes pop-in {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.completeText {
+  color: var(--dl-text-secondary);
+  margin-bottom: v.$space-6;
+}
+
+// ── Error state ──────────────────────────────────────────────────────
+.errorState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: v.$space-16 v.$space-4;
+  color: var(--dl-text-secondary);
+}
+
+.errorIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: v.$radius-full;
+  background-color: var(--dl-danger-50);
+  color: var(--dl-danger-600);
+  margin-bottom: v.$space-4;
+}
