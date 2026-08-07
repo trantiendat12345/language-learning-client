@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { AlertCircle, BarChart3, BookOpen, CheckCircle2, Clock, Globe, LogIn } from 'lucide-react'
+import { AlertCircle, BarChart3, BookOpen, CheckCircle2, ChevronRight, Clock, Globe, LogIn } from 'lucide-react'
 import courseService from '../../services/courseService'
 import { getApiErrorMessage } from '../../api/apiError'
 import { useAuthContext } from '../../contexts/AuthContext'
@@ -11,7 +11,7 @@ import styles from './CourseDetailPage.module.scss'
 function CourseDetailPage() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
-  const { user } = useAuthContext()
+  const { user, isLoading: isAuthLoading } = useAuthContext()
   const [course, setCourse] = useState<CourseResponse | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
@@ -20,7 +20,11 @@ function CourseDetailPage() {
   const [enrollFailed, setEnrollFailed] = useState(false)
 
   useEffect(() => {
-    if (!id) return
+    // Đợi AuthContext khôi phục xong access token trước khi gọi API - Backend dùng
+    // currentUserId (nếu có) để ghi ActivityHistory VIEWED, gọi quá sớm lúc tải lại trang sẽ
+    // bị coi là request ẩn danh và bỏ lỡ log này (xem lý do đầy đủ ở LessonDetailPage.tsx,
+    // nơi cùng race condition này gây bug hiển thị sai enrolled).
+    if (!id || isAuthLoading) return
     let ignore = false
 
     async function loadCourse() {
@@ -40,7 +44,7 @@ function CourseDetailPage() {
     return () => {
       ignore = true
     }
-  }, [id])
+  }, [id, isAuthLoading])
 
   async function handleEnroll() {
     if (!id) return
@@ -139,18 +143,21 @@ function CourseDetailPage() {
             ) : (
               <div className={styles.lessonList}>
                 {course.lessons.map((lesson, index) => (
-                  <Card key={lesson.id} padding="md" className={styles.lessonItem}>
-                    <span className={styles.lessonIndex}>{index + 1}</span>
-                    <div className={styles.lessonBody}>
-                      <div className={styles.lessonTitle}>{lesson.title}</div>
-                      {lesson.estimatedMinutes != null && (
-                        <div className={styles.lessonMeta}>
-                          <Clock size={12} />
-                          {lesson.estimatedMinutes} phút
-                        </div>
-                      )}
-                    </div>
-                  </Card>
+                  <Link to={`/lessons/${lesson.id}`} key={lesson.id} className={styles.lessonLink}>
+                    <Card padding="md" hoverable className={styles.lessonItem}>
+                      <span className={styles.lessonIndex}>{index + 1}</span>
+                      <div className={styles.lessonBody}>
+                        <div className={styles.lessonTitle}>{lesson.title}</div>
+                        {lesson.estimatedMinutes != null && (
+                          <div className={styles.lessonMeta}>
+                            <Clock size={12} />
+                            {lesson.estimatedMinutes} phút
+                          </div>
+                        )}
+                      </div>
+                      <ChevronRight size={18} className={styles.lessonChevron} />
+                    </Card>
+                  </Link>
                 ))}
               </div>
             )}

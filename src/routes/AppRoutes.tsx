@@ -16,6 +16,7 @@ import DashboardPage from '../pages/DashboardPage'
 import ProfilePage from '../pages/ProfilePage'
 import CourseListPage from '../pages/courses/CourseListPage'
 import CourseDetailPage from '../pages/courses/CourseDetailPage'
+import LessonDetailPage from '../pages/lessons/LessonDetailPage'
 
 function AppRoutes() {
   return (
@@ -27,6 +28,7 @@ function AppRoutes() {
               <Route path="/" element={<LandingPage />} />
               <Route path="/courses" element={<CourseListPage />} />
               <Route path="/courses/:id" element={<CourseDetailPage />} />
+              <Route path="/lessons/:id" element={<LessonDetailPage />} />
             </Route>
             <Route element={<AuthLayout />}>
               <Route path="/verify-email" element={<VerifyEmailPage />} />

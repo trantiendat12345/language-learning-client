@@ -1,7 +1,8 @@
 // Khớp progress/dto/response/CourseEnrollmentResponse.java, ProgressDashboardResponse.java,
-// ContinueLearningResponse.java ở Backend.
+// ContinueLearningResponse.java, LessonCompleteResponse.java ở Backend.
 
 export type EnrollmentStatus = 'IN_PROGRESS' | 'COMPLETED'
+export type LessonProgressStatus = 'NOT_STARTED' | 'IN_PROGRESS' | 'COMPLETED'
 
 /** Trả về từ POST /api/courses/{id}/enroll. */
 export interface CourseEnrollmentResponse {
@@ -36,4 +37,13 @@ export interface ProgressDashboardResponse {
   wordsToReviewCount: number
   recentQuizAccuracy: number | null
   continueLearning: ContinueLearningResponse | null
+}
+
+/** Trả về từ POST /api/lessons/{id}/complete - cho biết ngay trạng thái mới của Lesson + Course cha. */
+export interface LessonCompleteResponse {
+  lessonId: number
+  lessonProgressStatus: LessonProgressStatus
+  courseId: number
+  courseProgressPercent: number
+  courseStatus: EnrollmentStatus
 }

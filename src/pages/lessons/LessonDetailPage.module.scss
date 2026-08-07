@@ -1,0 +1,330 @@
+@use '../../styles/variables' as v;
+
+.page {
+  padding: v.$space-6 0 v.$space-16;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: v.$space-2;
+  font-size: v.$font-size-sm;
+  font-weight: v.$font-weight-medium;
+  color: var(--dl-text-secondary);
+  margin-bottom: v.$space-6;
+
+  &:hover {
+    color: var(--dl-primary-600);
+  }
+}
+
+// ── Header ────────────────────────────────────────────────────────────
+.header {
+  margin-bottom: v.$space-6;
+}
+
+.title {
+  margin-bottom: v.$space-2;
+}
+
+.description {
+  color: var(--dl-text-secondary);
+  line-height: v.$line-height-relaxed;
+  margin-bottom: v.$space-4;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: v.$space-6;
+  font-size: v.$font-size-sm;
+  color: var(--dl-text-tertiary);
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: v.$space-2;
+}
+
+// ── Preview banner ────────────────────────────────────────────────────
+.previewBanner {
+  display: flex;
+  align-items: center;
+  gap: v.$space-3;
+  padding: v.$space-4;
+  border-radius: v.$radius-sm;
+  background-color: var(--dl-warning-50);
+  color: var(--dl-warning-600);
+  font-size: v.$font-size-sm;
+  margin-bottom: v.$space-8;
+
+  a {
+    color: inherit;
+    font-weight: v.$font-weight-semibold;
+    text-decoration: underline;
+  }
+}
+
+// ── Media ─────────────────────────────────────────────────────────────
+.media {
+  margin-bottom: v.$space-8;
+  border-radius: v.$radius-lg;
+  overflow: hidden;
+  background-color: var(--dl-gray-950);
+}
+
+.media video {
+  width: 100%;
+  display: block;
+  max-height: 480px;
+}
+
+.audioCard {
+  display: flex;
+  align-items: center;
+  gap: v.$space-4;
+  margin-bottom: v.$space-8;
+}
+
+.audioIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: v.$radius-full;
+  background-color: var(--dl-secondary-50);
+  color: var(--dl-secondary-600);
+}
+
+.audioCard audio {
+  flex: 1;
+  min-width: 0;
+  height: 40px;
+}
+
+// ── Section chung ─────────────────────────────────────────────────────
+.section {
+  margin-bottom: v.$space-8;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: v.$space-2;
+  margin-bottom: v.$space-4;
+}
+
+.sectionCount {
+  font-size: v.$font-size-sm;
+  font-weight: v.$font-weight-medium;
+  color: var(--dl-text-tertiary);
+}
+
+.emptySection {
+  color: var(--dl-text-secondary);
+  text-align: center;
+  padding: v.$space-6 0;
+}
+
+// ── Vocabulary ────────────────────────────────────────────────────────
+.vocabGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: v.$space-4;
+
+  @media (max-width: v.$breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.vocabCard {
+  display: flex;
+  align-items: center;
+  gap: v.$space-4;
+}
+
+.vocabImage {
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  border-radius: v.$radius-sm;
+  object-fit: cover;
+  background-color: var(--dl-card-hover);
+}
+
+.vocabImageFallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  border-radius: v.$radius-sm;
+  background: linear-gradient(135deg, var(--dl-primary-400), var(--dl-secondary-500));
+  color: #fff;
+}
+
+.vocabBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.vocabWordRow {
+  display: flex;
+  align-items: center;
+  gap: v.$space-2;
+  margin-bottom: 2px;
+}
+
+.vocabWord {
+  font-weight: v.$font-weight-bold;
+  color: var(--dl-text-primary);
+}
+
+.vocabIpa {
+  font-size: v.$font-size-xs;
+  color: var(--dl-text-tertiary);
+}
+
+.vocabMeaning {
+  font-size: v.$font-size-sm;
+  color: var(--dl-text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// ── Grammar ───────────────────────────────────────────────────────────
+.grammarList {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-4;
+}
+
+.grammarHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: v.$space-3;
+  margin-bottom: v.$space-2;
+}
+
+.grammarTitle {
+  font-weight: v.$font-weight-bold;
+  color: var(--dl-text-primary);
+}
+
+.grammarPattern {
+  display: inline-block;
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: v.$font-size-sm;
+  padding: v.$space-2 v.$space-3;
+  border-radius: v.$radius-sm;
+  background-color: var(--dl-secondary-50);
+  color: var(--dl-secondary-600);
+  margin-bottom: v.$space-3;
+}
+
+.grammarExplanation {
+  color: var(--dl-text-secondary);
+  line-height: v.$line-height-relaxed;
+  margin-bottom: v.$space-4;
+}
+
+.exampleList {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-3;
+}
+
+.exampleItem {
+  padding: v.$space-3 v.$space-4;
+  border-left: 3px solid var(--dl-primary-300);
+  background-color: var(--dl-card-hover);
+  border-radius: 0 v.$radius-sm v.$radius-sm 0;
+}
+
+.exampleText {
+  color: var(--dl-text-primary);
+  font-weight: v.$font-weight-medium;
+}
+
+.exampleTranslation {
+  font-size: v.$font-size-sm;
+  color: var(--dl-text-secondary);
+  margin-top: 2px;
+}
+
+.exampleNote {
+  font-size: v.$font-size-xs;
+  color: var(--dl-text-tertiary);
+  margin-top: v.$space-2;
+  font-style: italic;
+}
+
+// ── Complete section ──────────────────────────────────────────────────
+.completeCard {
+  text-align: center;
+}
+
+.completeIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: v.$radius-full;
+  background-color: var(--dl-success-50);
+  color: var(--dl-success-600);
+  margin-bottom: v.$space-4;
+  animation: pop-in 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes pop-in {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.completeText {
+  color: var(--dl-text-secondary);
+  margin-bottom: v.$space-6;
+}
+
+.completeError {
+  color: var(--dl-danger-600);
+  font-size: v.$font-size-sm;
+  margin-top: v.$space-3;
+}
+
+// ── Error / loading ───────────────────────────────────────────────────
+.errorState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: v.$space-16 v.$space-4;
+  color: var(--dl-text-secondary);
+}
+
+.errorIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: v.$radius-full;
+  background-color: var(--dl-danger-50);
+  color: var(--dl-danger-600);
+  margin-bottom: v.$space-4;
+}

@@ -124,10 +124,24 @@
   gap: v.$space-3;
 }
 
+.lessonLink {
+  display: block;
+  color: inherit;
+
+  &:hover {
+    color: inherit;
+  }
+}
+
 .lessonItem {
   display: flex;
   align-items: center;
   gap: v.$space-4;
+}
+
+.lessonChevron {
+  flex-shrink: 0;
+  color: var(--dl-text-tertiary);
 }
 
 .lessonIndex {
