@@ -1,6 +1,8 @@
 // Khớp user/entity/User.java (qua UserResponse), user/dto/request/UserUpdateRequest.java,
 // ChangePasswordRequest.java ở Backend.
 
+import type { DailyGoalType } from './progress'
+
 export type UserStatus = 'PENDING_VERIFICATION' | 'ACTIVE' | 'DISABLED' | 'LOCKED'
 
 export interface UserResponse {
@@ -18,9 +20,13 @@ export interface UserResponse {
   longestStreak: number
   coin: number
   timezone: string
+  dailyGoalType: DailyGoalType
+  dailyGoalValue: number
   status: UserStatus
 }
 
+// dailyGoalType/dailyGoalValue bắt buộc ở Backend (@NotNull/int primitive) - PUT /api/users/me
+// phải luôn gửi kèm 2 field này dù người dùng không đổi mục tiêu, không phải optional.
 export interface UserUpdateRequest {
   displayName?: string
   avatarUrl?: string
@@ -28,6 +34,8 @@ export interface UserUpdateRequest {
   gender?: string
   country?: string
   currentLevel?: string
+  dailyGoalType: DailyGoalType
+  dailyGoalValue: number
 }
 
 export interface ChangePasswordRequest {

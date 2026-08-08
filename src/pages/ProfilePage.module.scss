@@ -1,0 +1,130 @@
+@use '../styles/variables' as v;
+
+.page {
+  padding: v.$space-8 0 v.$space-16;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+// ── Header ────────────────────────────────────────────────────────────
+.headerCard {
+  display: flex;
+  align-items: center;
+  gap: v.$space-6;
+  margin-bottom: v.$space-6;
+
+  @media (max-width: v.$breakpoint-sm) {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.avatar {
+  width: 88px;
+  height: 88px;
+  flex-shrink: 0;
+  border-radius: v.$radius-full;
+  object-fit: cover;
+}
+
+.avatarFallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 88px;
+  height: 88px;
+  flex-shrink: 0;
+  border-radius: v.$radius-full;
+  background: linear-gradient(135deg, var(--dl-primary-400), var(--dl-secondary-500));
+  color: #fff;
+  font-size: v.$font-size-2xl;
+  font-weight: v.$font-weight-bold;
+}
+
+.headerInfo {
+  min-width: 0;
+}
+
+.displayName {
+  margin-bottom: 2px;
+}
+
+.email {
+  color: var(--dl-text-secondary);
+  margin-bottom: v.$space-3;
+}
+
+.statsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: v.$space-2;
+
+  @media (max-width: v.$breakpoint-sm) {
+    justify-content: center;
+  }
+}
+
+// ── Section card chung ───────────────────────────────────────────────
+.sectionCard {
+  margin-bottom: v.$space-6;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: v.$space-2;
+  margin-bottom: v.$space-6;
+}
+
+.sectionIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: v.$radius-sm;
+  background-color: var(--dl-primary-50);
+  color: var(--dl-primary-600);
+}
+
+.successText {
+  color: var(--dl-success-600);
+  background-color: var(--dl-success-50);
+  padding: v.$space-3;
+  border-radius: v.$radius-sm;
+  font-size: v.$font-size-sm;
+  margin: 0 0 v.$space-4;
+}
+
+.errorText {
+  color: var(--dl-danger-600);
+  background-color: var(--dl-danger-50);
+  padding: v.$space-3;
+  border-radius: v.$radius-sm;
+  font-size: v.$font-size-sm;
+  margin: 0 0 v.$space-4;
+}
+
+// ── Form ─────────────────────────────────────────────────────────────
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: v.$space-4;
+
+  @media (max-width: v.$breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.formStack {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-4;
+  max-width: 360px;
+}
+
+.submitButton {
+  grid-column: 1 / -1;
+  justify-self: start;
+  margin-top: v.$space-2;
+}

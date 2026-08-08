@@ -1,11 +1,45 @@
 import { useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
+import { Flame, KeyRound, Trophy, User as UserIcon } from 'lucide-react'
 import { useAuthContext } from '../contexts/AuthContext'
 import userService from '../services/userService'
 import { getApiErrorMessage } from '../api/apiError'
+import { Badge, Button, Card, Input, Select } from '../components/ui'
 import type { ChangePasswordRequest, UserUpdateRequest } from '../types/user'
+import styles from './ProfilePage.module.scss'
 
 const PASSWORD_PATTERN = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/
+
+function ProfileHeader() {
+  const { user } = useAuthContext()
+  if (!user) return null
+
+  const displayName = user.displayName || user.username
+  const initial = displayName.charAt(0).toUpperCase()
+
+  return (
+    <Card padding="lg" className={styles.headerCard}>
+      {user.avatarUrl ? (
+        <img src={user.avatarUrl} alt="" className={styles.avatar} />
+      ) : (
+        <span className={styles.avatarFallback}>{initial}</span>
+      )}
+      <div className={styles.headerInfo}>
+        <h1 className={styles.displayName}>{displayName}</h1>
+        <p className={styles.email}>{user.email}</p>
+        <div className={styles.statsRow}>
+          <Badge variant="primary" icon={<Trophy size={11} />}>
+            {user.xp.toLocaleString('vi-VN')} XP
+          </Badge>
+          <Badge variant="accent" icon={<Flame size={11} />}>
+            {user.currentStreak} ngày streak
+          </Badge>
+          {user.currentLevel && <Badge variant="secondary">{user.currentLevel}</Badge>}
+        </div>
+      </div>
+    </Card>
+  )
+}
 
 function EditProfileSection() {
   const { user, refreshUser } = useAuthContext()
@@ -14,6 +48,7 @@ function EditProfileSection() {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors, isSubmitting },
   } = useForm<UserUpdateRequest>({
     defaultValues: {
@@ -23,14 +58,18 @@ function EditProfileSection() {
       gender: user?.gender ?? '',
       country: user?.country ?? '',
       currentLevel: user?.currentLevel ?? '',
+      dailyGoalType: user?.dailyGoalType ?? 'WORDS',
+      dailyGoalValue: user?.dailyGoalValue ?? 10,
     },
   })
+
+  const dailyGoalType = useWatch({ control, name: 'dailyGoalType' })
 
   async function onSubmit(data: UserUpdateRequest) {
     setServerError(null)
     setSuccessMessage(null)
     try {
-      await userService.updateMyProfile(data)
+      await userService.updateMyProfile({ ...data, dailyGoalValue: Number(data.dailyGoalValue) })
       await refreshUser()
       setSuccessMessage('Cập nhật hồ sơ thành công')
     } catch (error) {
@@ -39,64 +78,60 @@ function EditProfileSection() {
   }
 
   return (
-    <div className="card mb-4">
-      <div className="card-body">
-        <h2 className="h5 mb-3">Chỉnh sửa hồ sơ</h2>
-        {serverError && <div className="alert alert-danger">{serverError}</div>}
-        {successMessage && <div className="alert alert-success">{successMessage}</div>}
-        <form onSubmit={handleSubmit(onSubmit)} noValidate>
-          <div className="mb-3">
-            <label className="form-label" htmlFor="displayName">
-              Tên hiển thị
-            </label>
-            <input
-              id="displayName"
-              className={`form-control ${errors.displayName ? 'is-invalid' : ''}`}
-              {...register('displayName', { maxLength: { value: 100, message: 'Tên hiển thị tối đa 100 ký tự' } })}
-            />
-            {errors.displayName && <div className="invalid-feedback">{errors.displayName.message}</div>}
-          </div>
-          <div className="mb-3">
-            <label className="form-label" htmlFor="avatarUrl">
-              Avatar URL
-            </label>
-            <input
-              id="avatarUrl"
-              className={`form-control ${errors.avatarUrl ? 'is-invalid' : ''}`}
-              {...register('avatarUrl', { maxLength: { value: 500, message: 'Avatar URL tối đa 500 ký tự' } })}
-            />
-            {errors.avatarUrl && <div className="invalid-feedback">{errors.avatarUrl.message}</div>}
-          </div>
-          <div className="mb-3">
-            <label className="form-label" htmlFor="birthday">
-              Ngày sinh
-            </label>
-            <input id="birthday" type="date" className="form-control" {...register('birthday')} />
-          </div>
-          <div className="mb-3">
-            <label className="form-label" htmlFor="gender">
-              Giới tính
-            </label>
-            <input id="gender" className="form-control" {...register('gender')} />
-          </div>
-          <div className="mb-3">
-            <label className="form-label" htmlFor="country">
-              Quốc gia
-            </label>
-            <input id="country" className="form-control" {...register('country')} />
-          </div>
-          <div className="mb-3">
-            <label className="form-label" htmlFor="currentLevel">
-              Trình độ hiện tại
-            </label>
-            <input id="currentLevel" className="form-control" {...register('currentLevel')} />
-          </div>
-          <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
-            {isSubmitting ? 'Đang lưu...' : 'Lưu thay đổi'}
-          </button>
-        </form>
+    <Card padding="lg" className={styles.sectionCard}>
+      <div className={styles.sectionTitle}>
+        <span className={styles.sectionIcon}>
+          <UserIcon size={16} />
+        </span>
+        <h2 className="h5" style={{ margin: 0 }}>
+          Chỉnh sửa hồ sơ
+        </h2>
       </div>
-    </div>
+
+      {successMessage && <p className={styles.successText}>{successMessage}</p>}
+      {serverError && <p className={styles.errorText}>{serverError}</p>}
+
+      <form onSubmit={handleSubmit(onSubmit)} noValidate className={styles.formGrid}>
+        <Input
+          label="Tên hiển thị"
+          error={errors.displayName?.message}
+          {...register('displayName', { maxLength: { value: 100, message: 'Tên hiển thị tối đa 100 ký tự' } })}
+        />
+        <Input
+          label="Avatar URL"
+          error={errors.avatarUrl?.message}
+          {...register('avatarUrl', { maxLength: { value: 500, message: 'Avatar URL tối đa 500 ký tự' } })}
+        />
+        <Input label="Ngày sinh" type="date" {...register('birthday')} />
+        <Input label="Giới tính" {...register('gender', { maxLength: { value: 20, message: 'Tối đa 20 ký tự' } })} error={errors.gender?.message} />
+        <Input
+          label="Quốc gia"
+          {...register('country', { maxLength: { value: 100, message: 'Tối đa 100 ký tự' } })}
+          error={errors.country?.message}
+        />
+        <Input
+          label="Trình độ hiện tại"
+          placeholder="VD: A1, B2..."
+          {...register('currentLevel', { maxLength: { value: 20, message: 'Tối đa 20 ký tự' } })}
+          error={errors.currentLevel?.message}
+        />
+        <Select label="Mục tiêu hằng ngày" {...register('dailyGoalType', { required: true })}>
+          <option value="WORDS">Theo số từ mới</option>
+          <option value="TIME">Theo thời gian học</option>
+        </Select>
+        <Input
+          label={`Chỉ tiêu (${dailyGoalType === 'TIME' ? 'phút/ngày' : 'từ/ngày'})`}
+          type="number"
+          min={1}
+          error={errors.dailyGoalValue?.message}
+          {...register('dailyGoalValue', { required: true, min: { value: 1, message: 'Chỉ tiêu tối thiểu là 1' }, valueAsNumber: true })}
+        />
+
+        <Button type="submit" isLoading={isSubmitting} className={styles.submitButton}>
+          Lưu thay đổi
+        </Button>
+      </form>
+    </Card>
   )
 }
 
@@ -126,72 +161,56 @@ function ChangePasswordSection() {
   }
 
   return (
-    <div className="card">
-      <div className="card-body">
-        <h2 className="h5 mb-3">Đổi mật khẩu</h2>
-        {serverError && <div className="alert alert-danger">{serverError}</div>}
-        {successMessage && <div className="alert alert-success">{successMessage}</div>}
-        <form onSubmit={handleSubmit(onSubmit)} noValidate>
-          <div className="mb-3">
-            <label className="form-label" htmlFor="currentPassword">
-              Mật khẩu hiện tại
-            </label>
-            <input
-              id="currentPassword"
-              type="password"
-              className={`form-control ${errors.currentPassword ? 'is-invalid' : ''}`}
-              {...register('currentPassword', { required: 'Password hiện tại không được để trống' })}
-            />
-            {errors.currentPassword && <div className="invalid-feedback">{errors.currentPassword.message}</div>}
-          </div>
-          <div className="mb-3">
-            <label className="form-label" htmlFor="newPassword">
-              Mật khẩu mới
-            </label>
-            <input
-              id="newPassword"
-              type="password"
-              className={`form-control ${errors.newPassword ? 'is-invalid' : ''}`}
-              {...register('newPassword', {
-                required: 'Password mới không được để trống',
-                pattern: { value: PASSWORD_PATTERN, message: 'Password phải từ 8 ký tự trở lên, có ít nhất 1 chữ và 1 số' },
-              })}
-            />
-            {errors.newPassword && <div className="invalid-feedback">{errors.newPassword.message}</div>}
-          </div>
-          <div className="mb-3">
-            <label className="form-label" htmlFor="confirmPassword">
-              Xác nhận mật khẩu mới
-            </label>
-            <input
-              id="confirmPassword"
-              type="password"
-              className={`form-control ${errors.confirmPassword ? 'is-invalid' : ''}`}
-              {...register('confirmPassword', {
-                required: 'Confirm password không được để trống',
-                validate: (value) => value === newPassword || 'Confirm password không khớp với password',
-              })}
-            />
-            {errors.confirmPassword && <div className="invalid-feedback">{errors.confirmPassword.message}</div>}
-          </div>
-          <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
-            {isSubmitting ? 'Đang đổi mật khẩu...' : 'Đổi mật khẩu'}
-          </button>
-        </form>
+    <Card padding="lg" className={styles.sectionCard}>
+      <div className={styles.sectionTitle}>
+        <span className={styles.sectionIcon}>
+          <KeyRound size={16} />
+        </span>
+        <h2 className="h5" style={{ margin: 0 }}>
+          Đổi mật khẩu
+        </h2>
       </div>
-    </div>
+
+      {successMessage && <p className={styles.successText}>{successMessage}</p>}
+      {serverError && <p className={styles.errorText}>{serverError}</p>}
+
+      <form onSubmit={handleSubmit(onSubmit)} noValidate className={styles.formStack}>
+        <Input
+          label="Mật khẩu hiện tại"
+          type="password"
+          error={errors.currentPassword?.message}
+          {...register('currentPassword', { required: 'Mật khẩu hiện tại không được để trống' })}
+        />
+        <Input
+          label="Mật khẩu mới"
+          type="password"
+          error={errors.newPassword?.message}
+          {...register('newPassword', {
+            required: 'Mật khẩu mới không được để trống',
+            pattern: { value: PASSWORD_PATTERN, message: 'Mật khẩu phải từ 8 ký tự trở lên, có ít nhất 1 chữ và 1 số' },
+          })}
+        />
+        <Input
+          label="Xác nhận mật khẩu mới"
+          type="password"
+          error={errors.confirmPassword?.message}
+          {...register('confirmPassword', {
+            required: 'Xác nhận mật khẩu không được để trống',
+            validate: (value) => value === newPassword || 'Xác nhận mật khẩu không khớp',
+          })}
+        />
+        <Button type="submit" isLoading={isSubmitting} className={styles.submitButton}>
+          Đổi mật khẩu
+        </Button>
+      </form>
+    </Card>
   )
 }
 
 function ProfilePage() {
-  const { user } = useAuthContext()
-
   return (
-    <div className="container py-5" style={{ maxWidth: 560 }}>
-      <h1 className="h3 mb-1">Hồ sơ cá nhân</h1>
-      <p className="text-muted mb-4">
-        {user?.username} · {user?.email}
-      </p>
+    <div className={`container ${styles.page}`}>
+      <ProfileHeader />
       <EditProfileSection />
       <ChangePasswordSection />
     </div>
