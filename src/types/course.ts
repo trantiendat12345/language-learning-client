@@ -1,4 +1,5 @@
-// Khớp course/dto/response/CourseResponse.java, CourseSummaryResponse.java ở Backend.
+// Khớp course/dto/response/CourseResponse.java, CourseSummaryResponse.java,
+// request/CourseCreateRequest.java, CourseUpdateRequest.java ở Backend.
 
 import type { LessonSummaryResponse } from './lesson'
 
@@ -30,4 +31,27 @@ export interface CourseResponse {
   displayOrder: number
   status: CourseStatus
   lessons: LessonSummaryResponse[]
+}
+
+// Không có status - Course mới tạo luôn ở DRAFT, phải PUT sang PUBLISHED sau khi tạo.
+export interface CourseCreateRequest {
+  languageId: number
+  title: string
+  slug: string
+  description?: string
+  thumbnailUrl?: string
+  difficulty?: string
+  estimatedMinutes?: number
+  displayOrder: number
+}
+
+// Không có languageId/slug - cố định từ lúc tạo, không sửa được sau đó.
+export interface CourseUpdateRequest {
+  title: string
+  description?: string
+  thumbnailUrl?: string
+  difficulty?: string
+  estimatedMinutes?: number
+  displayOrder: number
+  status: CourseStatus
 }

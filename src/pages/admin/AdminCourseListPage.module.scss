@@ -1,0 +1,98 @@
+@use '../../styles/variables' as v;
+
+.page {
+  max-width: 900px;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: v.$space-4;
+  margin-bottom: v.$space-6;
+  flex-wrap: wrap;
+}
+
+.subtitle {
+  color: var(--dl-text-secondary);
+}
+
+.form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: v.$space-3;
+  padding: v.$space-6;
+  border-radius: v.$radius-lg;
+  background-color: var(--dl-card);
+  border: 1px solid var(--dl-border);
+  margin-bottom: v.$space-6;
+
+  @media (max-width: v.$breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.formSubmit {
+  grid-column: 1 / -1;
+  justify-self: start;
+}
+
+.errorText {
+  color: var(--dl-danger-600);
+  font-size: v.$font-size-sm;
+  margin: v.$space-3 0 0;
+  grid-column: 1 / -1;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-3;
+  margin-bottom: v.$space-6;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: v.$space-4;
+  cursor: pointer;
+}
+
+.itemMain {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.itemTitle {
+  font-weight: v.$font-weight-semibold;
+  color: var(--dl-text-primary);
+}
+
+.itemMeta {
+  font-size: v.$font-size-xs;
+  color: var(--dl-text-tertiary);
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: v.$space-16 v.$space-4;
+  color: var(--dl-text-secondary);
+}
+
+.emptyIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: v.$radius-full;
+  background-color: var(--dl-card-hover);
+  color: var(--dl-text-tertiary);
+  margin-bottom: v.$space-4;
+}

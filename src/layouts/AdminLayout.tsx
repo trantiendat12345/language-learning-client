@@ -1,5 +1,5 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
-import { LayoutDashboard, LogOut, Users, ArrowLeftCircle } from 'lucide-react'
+import { LayoutDashboard, LogOut, Users, ArrowLeftCircle, BookOpen, Globe } from 'lucide-react'
 import { useAuthContext } from '../contexts/AuthContext'
 import Logo from '../components/common/Logo'
 import ThemeToggle from '../components/common/ThemeToggle'
@@ -8,6 +8,8 @@ import styles from './AdminLayout.module.scss'
 const NAV_ITEMS = [
   { to: '/admin', label: 'Tổng quan', icon: LayoutDashboard, end: true },
   { to: '/admin/users', label: 'Người dùng', icon: Users, end: false },
+  { to: '/admin/courses', label: 'Khoá học', icon: BookOpen, end: false },
+  { to: '/admin/languages', label: 'Ngôn ngữ', icon: Globe, end: false },
 ]
 
 function AdminLayout() {

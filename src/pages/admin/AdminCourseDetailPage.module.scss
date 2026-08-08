@@ -1,0 +1,135 @@
+@use '../../styles/variables' as v;
+
+.page {
+  max-width: 800px;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: v.$space-2;
+  font-size: v.$font-size-sm;
+  font-weight: v.$font-weight-medium;
+  color: var(--dl-text-secondary);
+  margin-bottom: v.$space-6;
+
+  &:hover {
+    color: var(--dl-primary-600);
+  }
+}
+
+.subtitle {
+  color: var(--dl-text-secondary);
+  margin-bottom: v.$space-6;
+}
+
+.sectionCard {
+  margin-bottom: v.$space-8;
+}
+
+.successText {
+  color: var(--dl-success-600);
+  background-color: var(--dl-success-50);
+  padding: v.$space-3;
+  border-radius: v.$radius-sm;
+  font-size: v.$font-size-sm;
+  margin: v.$space-4 0 0;
+}
+
+.errorText {
+  color: var(--dl-danger-600);
+  font-size: v.$font-size-sm;
+  margin: v.$space-3 0 0;
+  grid-column: 1 / -1;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: v.$space-3;
+  margin-top: v.$space-4;
+
+  @media (max-width: v.$breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.formActions {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: v.$space-2;
+}
+
+.formSubmit {
+  grid-column: 1 / -1;
+  justify-self: start;
+}
+
+.lessonsSection {
+  margin-top: v.$space-8;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: v.$space-2;
+  margin-bottom: v.$space-4;
+}
+
+.emptyLessons {
+  color: var(--dl-text-secondary);
+  text-align: center;
+  padding: v.$space-6 0;
+  margin: 0;
+}
+
+.lessonList {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-3;
+}
+
+.lessonItem {
+  display: flex;
+  align-items: center;
+  gap: v.$space-4;
+  cursor: pointer;
+}
+
+.lessonTitle {
+  flex: 1;
+  min-width: 0;
+  font-weight: v.$font-weight-semibold;
+  color: var(--dl-text-primary);
+}
+
+.lessonMeta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: v.$font-size-xs;
+  color: var(--dl-text-tertiary);
+  flex-shrink: 0;
+}
+
+.errorState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: v.$space-16 v.$space-4;
+  color: var(--dl-text-secondary);
+}
+
+.errorIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: v.$radius-full;
+  background-color: var(--dl-danger-50);
+  color: var(--dl-danger-600);
+  margin-bottom: v.$space-4;
+}

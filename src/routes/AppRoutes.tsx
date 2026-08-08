@@ -28,6 +28,10 @@ import QuizHistoryPage from '../pages/QuizHistoryPage'
 import ReviewPage from '../pages/ReviewPage'
 import AdminDashboardPage from '../pages/admin/AdminDashboardPage'
 import AdminUserListPage from '../pages/admin/AdminUserListPage'
+import AdminLanguageListPage from '../pages/admin/AdminLanguageListPage'
+import AdminCourseListPage from '../pages/admin/AdminCourseListPage'
+import AdminCourseDetailPage from '../pages/admin/AdminCourseDetailPage'
+import AdminLessonDetailPage from '../pages/admin/AdminLessonDetailPage'
 
 function AppRoutes() {
   return (
@@ -67,6 +71,10 @@ function AppRoutes() {
               <Route element={<AdminLayout />}>
                 <Route path="/admin" element={<AdminDashboardPage />} />
                 <Route path="/admin/users" element={<AdminUserListPage />} />
+                <Route path="/admin/languages" element={<AdminLanguageListPage />} />
+                <Route path="/admin/courses" element={<AdminCourseListPage />} />
+                <Route path="/admin/courses/:id" element={<AdminCourseDetailPage />} />
+                <Route path="/admin/lessons/:id" element={<AdminLessonDetailPage />} />
               </Route>
             </Route>
           </Routes>
