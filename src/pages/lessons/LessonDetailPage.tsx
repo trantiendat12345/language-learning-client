@@ -8,6 +8,7 @@ import {
   Clock,
   GraduationCap,
   ImageIcon,
+  ListChecks,
   LogIn,
   Volume2,
 } from 'lucide-react'
@@ -121,6 +122,9 @@ function LessonDetailPage() {
             {lesson.grammars.length} điểm ngữ pháp
           </span>
         </div>
+        <ButtonLink to={`/lessons/${lesson.id}/quiz`} size="sm" variant="outline" className={styles.quizButton} leftIcon={<ListChecks size={14} />}>
+          Làm Quiz
+        </ButtonLink>
       </div>
 
       {!lesson.enrolled && (

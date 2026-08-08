@@ -1,0 +1,330 @@
+@use '../../styles/variables' as v;
+
+.page {
+  padding: v.$space-6 0 v.$space-16;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: v.$space-2;
+  font-size: v.$font-size-sm;
+  font-weight: v.$font-weight-medium;
+  color: var(--dl-text-secondary);
+  margin-bottom: v.$space-6;
+
+  &:hover {
+    color: var(--dl-primary-600);
+  }
+}
+
+.header {
+  margin-bottom: v.$space-6;
+}
+
+.title {
+  margin: 0;
+}
+
+// ── Setup ─────────────────────────────────────────────────────────────
+.setupCard {
+  text-align: center;
+}
+
+.setupText {
+  color: var(--dl-text-secondary);
+  margin-bottom: v.$space-6;
+}
+
+.countOptions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: v.$space-3;
+  margin-bottom: v.$space-6;
+
+  @media (max-width: v.$breakpoint-sm) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.countButton {
+  padding: v.$space-3;
+  border-radius: v.$radius-sm;
+  border: 1px solid var(--dl-border);
+  font-weight: v.$font-weight-semibold;
+  color: var(--dl-text-secondary);
+  transition: all v.$transition-fast v.$ease-standard;
+
+  &:hover {
+    border-color: var(--dl-primary-400);
+    color: var(--dl-primary-600);
+  }
+}
+
+.countButtonActive {
+  border-color: var(--dl-primary-500);
+  background-color: var(--dl-primary-50);
+  color: var(--dl-primary-600);
+}
+
+.errorText {
+  color: var(--dl-danger-600);
+  font-size: v.$font-size-sm;
+  margin: v.$space-3 0 0;
+}
+
+// ── Warning banner ───────────────────────────────────────────────────
+.warningBanner {
+  display: flex;
+  align-items: center;
+  gap: v.$space-2;
+  padding: v.$space-3 v.$space-4;
+  border-radius: v.$radius-sm;
+  background-color: var(--dl-warning-50);
+  color: var(--dl-warning-600);
+  font-size: v.$font-size-sm;
+  margin-bottom: v.$space-4;
+}
+
+// ── Taking quiz ──────────────────────────────────────────────────────
+.progress {
+  text-align: center;
+  font-size: v.$font-size-sm;
+  font-weight: v.$font-weight-semibold;
+  color: var(--dl-text-tertiary);
+  margin-bottom: v.$space-4;
+}
+
+.questionCard {
+  text-align: center;
+  margin-bottom: v.$space-6;
+}
+
+.promptImage {
+  max-width: 100%;
+  max-height: 220px;
+  border-radius: v.$radius-lg;
+  margin-bottom: v.$space-4;
+}
+
+.promptText {
+  font-size: v.$font-size-xl;
+  font-weight: v.$font-weight-bold;
+  color: var(--dl-text-primary);
+  margin-bottom: v.$space-4;
+}
+
+.playButton {
+  display: inline-flex;
+  align-items: center;
+  gap: v.$space-2;
+  padding: v.$space-2 v.$space-4;
+  border-radius: v.$radius-full;
+  background-color: var(--dl-secondary-50);
+  color: var(--dl-secondary-600);
+  font-weight: v.$font-weight-medium;
+  font-size: v.$font-size-sm;
+  margin-bottom: v.$space-4;
+}
+
+.optionList {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-3;
+  text-align: left;
+}
+
+.optionButton {
+  display: flex;
+  align-items: center;
+  gap: v.$space-3;
+  padding: v.$space-3 v.$space-4;
+  border-radius: v.$radius-sm;
+  border: 1.5px solid var(--dl-border);
+  color: var(--dl-text-primary);
+  transition: all v.$transition-fast v.$ease-standard;
+
+  &:hover {
+    border-color: var(--dl-primary-400);
+  }
+}
+
+.optionSelected {
+  border-color: var(--dl-primary-500);
+  background-color: var(--dl-primary-50);
+  color: var(--dl-primary-600);
+  font-weight: v.$font-weight-semibold;
+}
+
+.optionImage {
+  width: 56px;
+  height: 56px;
+  border-radius: v.$radius-sm;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.textAnswer {
+  text-align: left;
+}
+
+.unsupportedNote {
+  color: var(--dl-text-tertiary);
+  font-style: italic;
+}
+
+.actionsRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: v.$space-4;
+}
+
+.skipButton {
+  font-size: v.$font-size-sm;
+  color: var(--dl-text-tertiary);
+  text-decoration: underline;
+
+  &:hover {
+    color: var(--dl-text-secondary);
+  }
+}
+
+// ── Result ────────────────────────────────────────────────────────────
+.resultHeader {
+  text-align: center;
+  margin-bottom: v.$space-6;
+}
+
+.resultIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: v.$radius-full;
+  background-color: var(--dl-success-50);
+  color: var(--dl-success-600);
+  margin-bottom: v.$space-4;
+}
+
+.resultSubtitle {
+  color: var(--dl-text-secondary);
+  margin: 0;
+}
+
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: v.$space-3;
+  margin-bottom: v.$space-8;
+
+  @media (max-width: v.$breakpoint-sm) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.statBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: v.$space-4;
+  border-radius: v.$radius-sm;
+  background-color: var(--dl-card-hover);
+}
+
+.statValue {
+  font-size: v.$font-size-lg;
+  font-weight: v.$font-weight-bold;
+  color: var(--dl-text-primary);
+}
+
+.statLabel {
+  font-size: v.$font-size-xs;
+  color: var(--dl-text-tertiary);
+}
+
+.reviewList {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-3;
+  margin-bottom: v.$space-8;
+}
+
+.reviewItem {
+  text-align: left;
+}
+
+.reviewHeader {
+  display: flex;
+  align-items: center;
+  gap: v.$space-2;
+  margin-bottom: v.$space-2;
+}
+
+.reviewCorrect {
+  display: inline-flex;
+  color: var(--dl-success-600);
+}
+
+.reviewWrong {
+  display: inline-flex;
+  color: var(--dl-danger-600);
+}
+
+.reviewQuestionNo {
+  font-size: v.$font-size-sm;
+  font-weight: v.$font-weight-semibold;
+  color: var(--dl-text-tertiary);
+}
+
+.reviewPrompt {
+  font-weight: v.$font-weight-semibold;
+  color: var(--dl-text-primary);
+  margin-bottom: v.$space-2;
+}
+
+.reviewAnswerLine {
+  font-size: v.$font-size-sm;
+  color: var(--dl-text-secondary);
+  margin: 0 0 4px;
+}
+
+.reviewExplanation {
+  font-size: v.$font-size-sm;
+  color: var(--dl-text-tertiary);
+  font-style: italic;
+  margin: v.$space-2 0 0;
+}
+
+.resultActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: v.$space-3;
+}
+
+// ── Error state ──────────────────────────────────────────────────────
+.errorState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: v.$space-16 v.$space-4;
+  color: var(--dl-text-secondary);
+}
+
+.errorIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: v.$radius-full;
+  background-color: var(--dl-danger-50);
+  color: var(--dl-danger-600);
+  margin-bottom: v.$space-4;
+}

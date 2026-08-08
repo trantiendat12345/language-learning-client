@@ -21,6 +21,8 @@ import VocabularyLearningPage from '../pages/lessons/VocabularyLearningPage'
 import DeckListPage from '../pages/decks/DeckListPage'
 import DeckDetailPage from '../pages/decks/DeckDetailPage'
 import FlashcardPage from '../pages/decks/FlashcardPage'
+import QuizPage from '../pages/lessons/QuizPage'
+import QuizHistoryPage from '../pages/QuizHistoryPage'
 
 function AppRoutes() {
   return (
@@ -37,6 +39,8 @@ function AppRoutes() {
               <Route path="/decks" element={<DeckListPage />} />
               <Route path="/decks/:id" element={<DeckDetailPage />} />
               <Route path="/decks/:id/flashcard" element={<FlashcardPage />} />
+              <Route path="/lessons/:id/quiz" element={<QuizPage />} />
+              <Route path="/quiz-history" element={<QuizHistoryPage />} />
             </Route>
             <Route element={<AuthLayout />}>
               <Route path="/verify-email" element={<VerifyEmailPage />} />
