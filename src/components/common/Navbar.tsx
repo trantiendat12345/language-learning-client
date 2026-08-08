@@ -1,5 +1,16 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { LayoutDashboard, LogOut, ShieldCheck } from 'lucide-react'
 import { useAuthContext } from '../../contexts/AuthContext'
+import Logo from './Logo'
+import ThemeToggle from './ThemeToggle'
+import { Button, ButtonLink } from '../ui'
+import styles from './Navbar.module.scss'
+
+const NAV_LINKS = [
+  { to: '/courses', label: 'Khoá học', requireAuth: false },
+  { to: '/decks', label: 'Deck', requireAuth: false },
+  { to: '/review', label: 'Ôn tập', requireAuth: true },
+]
 
 function Navbar() {
   const { user, isAdmin, logout } = useAuthContext()
@@ -10,54 +21,63 @@ function Navbar() {
     navigate('/login')
   }
 
+  const displayName = user?.displayName || user?.username || ''
+  const initial = displayName.charAt(0).toUpperCase()
+
   return (
-    <nav className="navbar navbar-expand navbar-light bg-white border-bottom">
-      <div className="container">
-        <Link className="navbar-brand" to="/">
-          Language Learning
-        </Link>
-        <Link to="/courses" className="nav-link d-inline">
-          Khoá học
-        </Link>
-        <Link to="/decks" className="nav-link d-inline">
-          Deck
-        </Link>
-        {user && (
-          <Link to="/review" className="nav-link d-inline">
-            Ôn tập
-          </Link>
-        )}
-        <div className="d-flex align-items-center gap-3 ms-auto">
+    <header className={styles.header}>
+      <div className={`container ${styles.bar}`}>
+        <Logo />
+
+        <nav className={styles.links}>
+          {NAV_LINKS.filter((link) => !link.requireAuth || user).map((link) => (
+            <NavLink key={link.to} to={link.to} className={({ isActive }) => `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`}>
+              {link.label}
+            </NavLink>
+          ))}
+          {user && (
+            <NavLink to="/dashboard" className={({ isActive }) => `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`}>
+              <LayoutDashboard size={14} />
+              Dashboard
+            </NavLink>
+          )}
+        </nav>
+
+        <div className={styles.actions}>
+          <ThemeToggle />
           {user ? (
             <>
-              <Link to="/dashboard" className="nav-link d-inline">
-                Dashboard
-              </Link>
-              <Link to="/profile" className="nav-link d-inline">
-                {user.displayName ?? user.username}
-              </Link>
               {isAdmin && (
-                <Link to="/admin" className="nav-link d-inline">
+                <NavLink to="/admin" className={styles.adminLink}>
+                  <ShieldCheck size={14} />
                   Admin
-                </Link>
+                </NavLink>
               )}
-              <button type="button" className="btn btn-outline-secondary btn-sm" onClick={handleLogout}>
+              <NavLink to="/profile" className={styles.profileLink}>
+                {user.avatarUrl ? (
+                  <img src={user.avatarUrl} alt="" className={styles.avatar} />
+                ) : (
+                  <span className={styles.avatarFallback}>{initial}</span>
+                )}
+                <span className={styles.profileName}>{displayName}</span>
+              </NavLink>
+              <Button variant="ghost" size="sm" leftIcon={<LogOut size={14} />} onClick={handleLogout}>
                 Đăng xuất
-              </button>
+              </Button>
             </>
           ) : (
             <>
-              <Link to="/login" className="nav-link d-inline">
+              <NavLink to="/login" className={({ isActive }) => `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`}>
                 Đăng nhập
-              </Link>
-              <Link to="/register" className="btn btn-primary btn-sm">
+              </NavLink>
+              <ButtonLink to="/register" size="sm">
                 Đăng ký
-              </Link>
+              </ButtonLink>
             </>
           )}
         </div>
       </div>
-    </nav>
+    </header>
   )
 }
 

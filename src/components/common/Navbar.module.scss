@@ -1,0 +1,140 @@
+@use '../../styles/variables' as v;
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: v.$z-navbar;
+  background-color: var(--dl-card);
+  border-bottom: 1px solid var(--dl-border);
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: v.$space-6;
+  padding: v.$space-3 v.$space-4;
+
+  @media (max-width: v.$breakpoint-md) {
+    flex-wrap: wrap;
+    row-gap: v.$space-2;
+  }
+}
+
+// ── Nav links ─────────────────────────────────────────────────────────
+.links {
+  display: flex;
+  align-items: center;
+  gap: v.$space-1;
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media (max-width: v.$breakpoint-md) {
+    order: 3;
+    flex-basis: 100%;
+    padding-top: v.$space-2;
+    border-top: 1px solid var(--dl-border);
+  }
+}
+
+.navLink {
+  display: inline-flex;
+  align-items: center;
+  gap: v.$space-1;
+  padding: v.$space-2 v.$space-3;
+  border-radius: v.$radius-sm;
+  font-size: v.$font-size-sm;
+  font-weight: v.$font-weight-medium;
+  color: var(--dl-text-secondary);
+  white-space: nowrap;
+  transition: all v.$transition-fast v.$ease-standard;
+
+  &:hover {
+    background-color: var(--dl-card-hover);
+    color: var(--dl-text-primary);
+  }
+}
+
+.navLinkActive {
+  color: var(--dl-primary-600);
+  background-color: var(--dl-primary-50);
+}
+
+// ── Actions (phải) ───────────────────────────────────────────────────
+.actions {
+  display: flex;
+  align-items: center;
+  gap: v.$space-3;
+  flex-shrink: 0;
+}
+
+.adminLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: v.$space-2 v.$space-3;
+  border-radius: v.$radius-sm;
+  font-size: v.$font-size-sm;
+  font-weight: v.$font-weight-semibold;
+  color: var(--dl-accent-600);
+  background-color: var(--dl-accent-50);
+  white-space: nowrap;
+
+  &:hover {
+    color: var(--dl-accent-600);
+    filter: brightness(0.97);
+  }
+}
+
+.profileLink {
+  display: inline-flex;
+  align-items: center;
+  gap: v.$space-2;
+  padding: v.$space-1 v.$space-2;
+  border-radius: v.$radius-full;
+  color: var(--dl-text-primary);
+  transition: background-color v.$transition-fast v.$ease-standard;
+
+  &:hover {
+    background-color: var(--dl-card-hover);
+    color: var(--dl-text-primary);
+  }
+}
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: v.$radius-full;
+  object-fit: cover;
+}
+
+.avatarFallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: v.$radius-full;
+  background: linear-gradient(135deg, var(--dl-primary-400), var(--dl-secondary-500));
+  color: #fff;
+  font-size: v.$font-size-xs;
+  font-weight: v.$font-weight-bold;
+  flex-shrink: 0;
+}
+
+.profileName {
+  font-size: v.$font-size-sm;
+  font-weight: v.$font-weight-medium;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  @media (max-width: v.$breakpoint-sm) {
+    display: none;
+  }
+}
