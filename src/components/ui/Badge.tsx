@@ -1,7 +1,7 @@
 import type { HTMLAttributes, ReactNode } from 'react'
 import styles from './Badge.module.scss'
 
-export type BadgeVariant = 'neutral' | 'primary' | 'secondary' | 'accent' | 'success'
+export type BadgeVariant = 'neutral' | 'primary' | 'secondary' | 'accent' | 'success' | 'danger'
 
 export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   variant?: BadgeVariant

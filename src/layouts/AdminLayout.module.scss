@@ -1,0 +1,142 @@
+@use '../styles/variables' as v;
+
+.shell {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--dl-bg);
+
+  @media (max-width: v.$breakpoint-md) {
+    flex-direction: column;
+  }
+}
+
+// ── Sidebar ───────────────────────────────────────────────────────────
+.sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  padding: v.$space-6 v.$space-4;
+  background-color: var(--dl-card);
+  border-right: 1px solid var(--dl-border);
+
+  @media (max-width: v.$breakpoint-md) {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--dl-border);
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: v.$space-3;
+    padding: v.$space-4;
+  }
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: v.$space-2;
+  margin-bottom: v.$space-8;
+  padding: 0 v.$space-2;
+
+  @media (max-width: v.$breakpoint-md) {
+    margin-bottom: 0;
+  }
+}
+
+.adminTag {
+  padding: 2px v.$space-2;
+  border-radius: v.$radius-sm;
+  background-color: var(--dl-accent-50);
+  color: var(--dl-accent-600);
+  font-size: v.$font-size-xs;
+  font-weight: v.$font-weight-bold;
+  text-transform: uppercase;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-1;
+  flex: 1;
+
+  @media (max-width: v.$breakpoint-md) {
+    flex-direction: row;
+  }
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: v.$space-3;
+  padding: v.$space-3;
+  border-radius: v.$radius-sm;
+  color: var(--dl-text-secondary);
+  font-weight: v.$font-weight-medium;
+  font-size: v.$font-size-sm;
+  transition: all v.$transition-fast v.$ease-standard;
+
+  &:hover {
+    background-color: var(--dl-card-hover);
+    color: var(--dl-text-primary);
+  }
+}
+
+.navLinkActive {
+  background-color: var(--dl-primary-50);
+  color: var(--dl-primary-600);
+}
+
+.sidebarFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: v.$space-2;
+  padding-top: v.$space-4;
+  border-top: 1px solid var(--dl-border);
+
+  @media (max-width: v.$breakpoint-md) {
+    flex-direction: row;
+    align-items: center;
+    border-top: none;
+    padding-top: 0;
+    margin-left: auto;
+  }
+}
+
+.footerLink {
+  display: flex;
+  align-items: center;
+  gap: v.$space-2;
+  padding: v.$space-2;
+  color: var(--dl-text-tertiary);
+  font-size: v.$font-size-sm;
+
+  &:hover {
+    color: var(--dl-danger-600);
+  }
+}
+
+// ── Main ──────────────────────────────────────────────────────────────
+.main {
+  flex: 1;
+  min-width: 0;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: v.$space-4 v.$space-8;
+  border-bottom: 1px solid var(--dl-border);
+}
+
+.topbarUser {
+  font-size: v.$font-size-sm;
+  font-weight: v.$font-weight-medium;
+  color: var(--dl-text-secondary);
+}
+
+.content {
+  padding: v.$space-8;
+}

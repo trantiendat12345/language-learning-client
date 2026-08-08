@@ -1,12 +1,13 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
 import authService from '../services/authService'
 import userService from '../services/userService'
-import { setAccessToken, setAuthFailureListener } from '../api/tokenStore'
+import { getRolesFromToken, setAccessToken, setAuthFailureListener } from '../api/tokenStore'
 import type { LoginRequest, RegisterRequest } from '../types/auth'
 import type { UserResponse } from '../types/user'
 
 interface AuthContextValue {
   user: UserResponse | null
+  isAdmin: boolean
   isLoading: boolean
   login: (data: LoginRequest) => Promise<void>
   register: (data: RegisterRequest) => Promise<UserResponse>
@@ -18,10 +19,14 @@ const AuthContext = createContext<AuthContextValue | undefined>(undefined)
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<UserResponse | null>(null)
+  const [isAdmin, setIsAdmin] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    setAuthFailureListener(() => setUser(null))
+    setAuthFailureListener(() => {
+      setUser(null)
+      setIsAdmin(false)
+    })
     return () => setAuthFailureListener(null)
   }, [])
 
@@ -32,11 +37,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       try {
         const { accessToken } = await authService.refreshToken()
         setAccessToken(accessToken)
+        setIsAdmin(getRolesFromToken(accessToken).includes('ADMIN'))
         const profile = await userService.getMyProfile()
         setUser(profile)
       } catch {
         setAccessToken(null)
         setUser(null)
+        setIsAdmin(false)
       } finally {
         setIsLoading(false)
       }
@@ -47,6 +54,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   async function login(data: LoginRequest) {
     const { accessToken } = await authService.login(data)
     setAccessToken(accessToken)
+    setIsAdmin(getRolesFromToken(accessToken).includes('ADMIN'))
     const profile = await userService.getMyProfile()
     setUser(profile)
   }
@@ -61,6 +69,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     } finally {
       setAccessToken(null)
       setUser(null)
+      setIsAdmin(false)
     }
   }
 
@@ -70,7 +79,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, isLoading, login, register, logout, refreshUser }}>
+    <AuthContext.Provider value={{ user, isAdmin, isLoading, login, register, logout, refreshUser }}>
       {children}
     </AuthContext.Provider>
   )

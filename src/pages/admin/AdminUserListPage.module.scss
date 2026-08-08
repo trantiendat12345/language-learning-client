@@ -1,0 +1,182 @@
+@use '../../styles/variables' as v;
+
+.page {
+  max-width: 900px;
+}
+
+.subtitle {
+  color: var(--dl-text-secondary);
+  margin-bottom: v.$space-6;
+}
+
+.searchForm {
+  display: flex;
+  gap: v.$space-3;
+  margin-bottom: v.$space-6;
+  max-width: 480px;
+
+  > :first-child {
+    flex: 1;
+  }
+}
+
+.actionError {
+  color: var(--dl-danger-600);
+  font-size: v.$font-size-sm;
+  margin: 0 0 v.$space-4;
+}
+
+// ── List ──────────────────────────────────────────────────────────────
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-3;
+  margin-bottom: v.$space-6;
+}
+
+.item {
+  border-radius: v.$radius-lg;
+  background-color: var(--dl-card);
+  border: 1px solid var(--dl-border);
+  overflow: hidden;
+}
+
+.itemHeader {
+  display: flex;
+  align-items: center;
+  gap: v.$space-4;
+  width: 100%;
+  padding: v.$space-4 v.$space-6;
+  text-align: left;
+}
+
+.itemMain {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.itemName {
+  font-weight: v.$font-weight-semibold;
+  color: var(--dl-text-primary);
+}
+
+.itemMeta {
+  font-size: v.$font-size-xs;
+  color: var(--dl-text-tertiary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.itemXp {
+  font-size: v.$font-size-sm;
+  font-weight: v.$font-weight-semibold;
+  color: var(--dl-text-secondary);
+  flex-shrink: 0;
+}
+
+.itemActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: v.$space-2;
+  padding: 0 v.$space-6 v.$space-4;
+}
+
+.selfNote {
+  font-size: v.$font-size-xs;
+  color: var(--dl-text-tertiary);
+  font-style: italic;
+}
+
+.itemDetail {
+  padding: v.$space-4 v.$space-6 v.$space-6;
+  border-top: 1px solid var(--dl-border);
+}
+
+.progressError {
+  color: var(--dl-danger-600);
+  font-size: v.$font-size-sm;
+  margin: 0;
+}
+
+.progressStats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: v.$space-4;
+  margin-bottom: v.$space-4;
+  font-size: v.$font-size-sm;
+  color: var(--dl-text-secondary);
+}
+
+.progressStat {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.noEnrollment {
+  color: var(--dl-text-tertiary);
+  font-size: v.$font-size-sm;
+  margin: 0;
+}
+
+.enrollmentList {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-2;
+}
+
+.enrollmentRow {
+  display: flex;
+  align-items: center;
+  gap: v.$space-3;
+  padding: v.$space-2 v.$space-3;
+  border-radius: v.$radius-sm;
+  background-color: var(--dl-card-hover);
+  font-size: v.$font-size-sm;
+  color: var(--dl-text-tertiary);
+}
+
+.enrollmentTitle {
+  flex: 1;
+  min-width: 0;
+  color: var(--dl-text-primary);
+  font-weight: v.$font-weight-medium;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.enrollmentPercent {
+  font-weight: v.$font-weight-semibold;
+  color: var(--dl-text-secondary);
+}
+
+.enrollmentDate {
+  font-size: v.$font-size-xs;
+}
+
+// ── Empty state ──────────────────────────────────────────────────────
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: v.$space-16 v.$space-4;
+  color: var(--dl-text-secondary);
+}
+
+.emptyIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: v.$radius-full;
+  background-color: var(--dl-card-hover);
+  color: var(--dl-text-tertiary);
+  margin-bottom: v.$space-4;
+}

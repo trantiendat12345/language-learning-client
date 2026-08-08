@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAuthContext } from '../../contexts/AuthContext'
 
 function Navbar() {
-  const { user, logout } = useAuthContext()
+  const { user, isAdmin, logout } = useAuthContext()
   const navigate = useNavigate()
 
   async function handleLogout() {
@@ -36,6 +36,11 @@ function Navbar() {
               <Link to="/profile" className="nav-link d-inline">
                 {user.displayName ?? user.username}
               </Link>
+              {isAdmin && (
+                <Link to="/admin" className="nav-link d-inline">
+                  Admin
+                </Link>
+              )}
               <button type="button" className="btn btn-outline-secondary btn-sm" onClick={handleLogout}>
                 Đăng xuất
               </button>

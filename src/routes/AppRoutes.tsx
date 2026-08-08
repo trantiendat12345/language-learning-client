@@ -4,8 +4,10 @@ import { ThemeProvider } from '../contexts/ThemeContext'
 import PublicLayout from '../layouts/PublicLayout'
 import AuthLayout from '../layouts/AuthLayout'
 import UserLayout from '../layouts/UserLayout'
+import AdminLayout from '../layouts/AdminLayout'
 import ProtectedRoute from './ProtectedRoute'
 import PublicRoute from './PublicRoute'
+import AdminRoute from './AdminRoute'
 import LandingPage from '../pages/LandingPage'
 import LoginPage from '../pages/auth/LoginPage'
 import RegisterPage from '../pages/auth/RegisterPage'
@@ -24,6 +26,8 @@ import FlashcardPage from '../pages/decks/FlashcardPage'
 import QuizPage from '../pages/lessons/QuizPage'
 import QuizHistoryPage from '../pages/QuizHistoryPage'
 import ReviewPage from '../pages/ReviewPage'
+import AdminDashboardPage from '../pages/admin/AdminDashboardPage'
+import AdminUserListPage from '../pages/admin/AdminUserListPage'
 
 function AppRoutes() {
   return (
@@ -57,6 +61,12 @@ function AppRoutes() {
               <Route element={<UserLayout />}>
                 <Route path="/dashboard" element={<DashboardPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
+              </Route>
+            </Route>
+            <Route element={<AdminRoute />}>
+              <Route element={<AdminLayout />}>
+                <Route path="/admin" element={<AdminDashboardPage />} />
+                <Route path="/admin/users" element={<AdminUserListPage />} />
               </Route>
             </Route>
           </Routes>
