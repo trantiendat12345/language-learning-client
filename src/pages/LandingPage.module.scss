@@ -1,0 +1,244 @@
+@use '../styles/variables' as v;
+
+// ── Hero ──────────────────────────────────────────────────────────────
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(155deg, var(--dl-primary-600) 0%, var(--dl-primary-500) 45%, var(--dl-secondary-600) 100%);
+  color: #fff;
+  padding: v.$space-16 0;
+
+  @media (max-width: v.$breakpoint-sm) {
+    padding: v.$space-12 0;
+  }
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.35;
+  background: #fff;
+  pointer-events: none;
+}
+
+.blob1 {
+  width: 380px;
+  height: 380px;
+  top: -140px;
+  right: -80px;
+}
+
+.blob2 {
+  width: 300px;
+  height: 300px;
+  bottom: -120px;
+  left: -80px;
+  background: var(--dl-accent-300);
+  opacity: 0.3;
+}
+
+.heroInner {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.heroBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: v.$space-2;
+  padding: v.$space-1 v.$space-3;
+  border-radius: v.$radius-full;
+  background: rgb(255 255 255 / 16%);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgb(255 255 255 / 24%);
+  font-size: v.$font-size-xs;
+  font-weight: v.$font-weight-semibold;
+  margin-bottom: v.$space-6;
+}
+
+.heroTitle {
+  color: #fff;
+  font-size: v.$font-size-4xl;
+  font-weight: v.$font-weight-extrabold;
+  line-height: v.$line-height-tight;
+  letter-spacing: -0.03em;
+  margin-bottom: v.$space-4;
+
+  @media (max-width: v.$breakpoint-sm) {
+    font-size: v.$font-size-2xl;
+  }
+}
+
+.heroSubtitle {
+  font-size: v.$font-size-md;
+  color: rgb(255 255 255 / 90%);
+  line-height: v.$line-height-relaxed;
+  margin-bottom: v.$space-8;
+
+  @media (max-width: v.$breakpoint-sm) {
+    font-size: v.$font-size-base;
+  }
+}
+
+.heroActions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: v.$space-3;
+}
+
+.heroPrimaryBtn {
+  background-color: #fff !important;
+  color: var(--dl-primary-600) !important;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 15%) !important;
+
+  &:hover {
+    background-color: #fff !important;
+    transform: translateY(-2px);
+  }
+}
+
+.heroSecondaryBtn {
+  background-color: transparent !important;
+  border-color: rgb(255 255 255 / 40%) !important;
+  color: #fff !important;
+
+  &:hover {
+    background-color: rgb(255 255 255 / 12%) !important;
+    border-color: rgb(255 255 255 / 60%) !important;
+    color: #fff !important;
+  }
+}
+
+// ── Section chung ─────────────────────────────────────────────────────
+.section {
+  padding: v.$space-16 0;
+
+  @media (max-width: v.$breakpoint-sm) {
+    padding: v.$space-12 0;
+  }
+}
+
+.sectionHeader {
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto v.$space-12;
+}
+
+.sectionHeaderRow {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: v.$space-4;
+  margin-bottom: v.$space-8;
+
+  @media (max-width: v.$breakpoint-sm) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.sectionTitle {
+  margin-bottom: v.$space-2;
+}
+
+.sectionSubtitle {
+  color: var(--dl-text-secondary);
+  margin: 0;
+}
+
+// ── Feature grid ─────────────────────────────────────────────────────
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: v.$space-6;
+
+  @media (max-width: v.$breakpoint-lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: v.$breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.featureCard {
+  padding: v.$space-6;
+  border-radius: v.$radius-lg;
+  background-color: var(--dl-card);
+  border: 1px solid var(--dl-border);
+  transition:
+    transform v.$transition-fast v.$ease-standard,
+    box-shadow v.$transition-fast v.$ease-standard;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--dl-shadow-md);
+  }
+}
+
+.featureIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: v.$radius-md;
+  background: linear-gradient(135deg, var(--dl-primary-400), var(--dl-secondary-500));
+  color: #fff;
+  margin-bottom: v.$space-4;
+}
+
+.featureTitle {
+  font-size: v.$font-size-md;
+  font-weight: v.$font-weight-bold;
+  color: var(--dl-text-primary);
+  margin-bottom: v.$space-2;
+}
+
+.featureText {
+  font-size: v.$font-size-sm;
+  color: var(--dl-text-secondary);
+  line-height: v.$line-height-relaxed;
+  margin: 0;
+}
+
+// ── Course grid ──────────────────────────────────────────────────────
+.courseGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: v.$space-6;
+
+  @media (max-width: v.$breakpoint-lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: v.$breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ── CTA cuối trang ───────────────────────────────────────────────────
+.ctaSection {
+  background-color: var(--dl-card-hover);
+  padding: v.$space-16 0;
+}
+
+.ctaInner {
+  text-align: center;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.ctaTitle {
+  margin-bottom: v.$space-2;
+}
+
+.ctaSubtitle {
+  color: var(--dl-text-secondary);
+  margin-bottom: v.$space-6;
+}
