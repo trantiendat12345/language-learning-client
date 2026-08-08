@@ -1,6 +1,6 @@
 import axiosClient from '../api/axiosClient'
 import type { ApiResponse } from '../types/api'
-import type { ReviewRating, ReviewSubmitResponse } from '../types/review'
+import type { ReviewRating, ReviewSubmitResponse, ReviewTodayItemResponse } from '../types/review'
 
 async function submitReview(vocabularyId: number, rating: ReviewRating): Promise<ReviewSubmitResponse> {
   const response = await axiosClient.post<ApiResponse<ReviewSubmitResponse>>(`/api/review/${vocabularyId}`, {
@@ -9,4 +9,9 @@ async function submitReview(vocabularyId: number, rating: ReviewRating): Promise
   return response.data.data
 }
 
-export default { submitReview }
+async function getTodayReview(): Promise<ReviewTodayItemResponse[]> {
+  const response = await axiosClient.get<ApiResponse<ReviewTodayItemResponse[]>>('/api/review/today')
+  return response.data.data
+}
+
+export default { submitReview, getTodayReview }

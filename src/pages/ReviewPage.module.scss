@@ -1,0 +1,294 @@
+@use '../styles/variables' as v;
+
+.page {
+  padding: v.$space-8 0 v.$space-16;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: v.$space-8;
+}
+
+.subtitle {
+  color: var(--dl-text-secondary);
+}
+
+// ── Progress ──────────────────────────────────────────────────────────
+.progress {
+  text-align: center;
+  font-size: v.$font-size-sm;
+  font-weight: v.$font-weight-semibold;
+  color: var(--dl-text-tertiary);
+  margin-bottom: v.$space-4;
+}
+
+// ── Flip card (giống pattern FlashcardPage) ─────────────────────────
+.stage {
+  perspective: 1400px;
+  margin-bottom: v.$space-8;
+}
+
+.card {
+  position: relative;
+  height: 340px;
+  border-radius: v.$radius-xl;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 500ms v.$ease-standard;
+  outline: none;
+}
+
+.card.flipped {
+  transform: rotateY(180deg);
+}
+
+.face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: v.$space-3;
+  padding: v.$space-8;
+  border-radius: v.$radius-xl;
+  backface-visibility: hidden;
+  text-align: center;
+}
+
+.faceFront {
+  background: linear-gradient(135deg, var(--dl-secondary-500), var(--dl-primary-600));
+  color: #fff;
+}
+
+.faceBack {
+  background: var(--dl-card);
+  border: 1px solid var(--dl-border);
+  color: var(--dl-text-primary);
+  transform: rotateY(180deg);
+}
+
+.cardImage {
+  width: 80px;
+  height: 80px;
+  border-radius: v.$radius-lg;
+  object-fit: cover;
+}
+
+.cardImageFallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: v.$radius-lg;
+  background: rgb(255 255 255 / 15%);
+  color: rgb(255 255 255 / 85%);
+}
+
+.cardText {
+  font-size: v.$font-size-2xl;
+  font-weight: v.$font-weight-bold;
+}
+
+.cardIpa {
+  font-size: v.$font-size-sm;
+  opacity: 0.85;
+}
+
+.cardBadge {
+  background-color: rgb(255 255 255 / 20%) !important;
+  color: #fff !important;
+}
+
+.flipHint {
+  position: absolute;
+  bottom: v.$space-4;
+  font-size: v.$font-size-xs;
+  opacity: 0.75;
+}
+
+// ── Rating ────────────────────────────────────────────────────────────
+.ratingRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: v.$space-3;
+}
+
+.ratingButton {
+  padding: v.$space-3;
+  border-radius: v.$radius-sm;
+  font-weight: v.$font-weight-semibold;
+  font-size: v.$font-size-sm;
+  border: 1px solid var(--dl-border);
+  transition: all v.$transition-fast v.$ease-standard;
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  &:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: var(--dl-shadow-sm);
+  }
+}
+
+.forgot {
+  color: var(--dl-danger-600);
+
+  &:not(:disabled):hover {
+    background-color: var(--dl-danger-50);
+  }
+}
+
+.hard {
+  color: var(--dl-warning-600);
+
+  &:not(:disabled):hover {
+    background-color: var(--dl-warning-50);
+  }
+}
+
+.good {
+  color: var(--dl-primary-600);
+
+  &:not(:disabled):hover {
+    background-color: var(--dl-primary-50);
+  }
+}
+
+.easy {
+  color: var(--dl-secondary-600);
+
+  &:not(:disabled):hover {
+    background-color: var(--dl-secondary-50);
+  }
+}
+
+.ratingHint {
+  text-align: center;
+  font-size: v.$font-size-sm;
+  color: var(--dl-text-tertiary);
+  margin-top: v.$space-4;
+  margin-bottom: 0;
+}
+
+.ratingError {
+  text-align: center;
+  font-size: v.$font-size-sm;
+  color: var(--dl-danger-600);
+  margin-top: v.$space-3;
+  margin-bottom: 0;
+}
+
+// ── Complete card ─────────────────────────────────────────────────────
+.completeCard {
+  text-align: center;
+  padding: v.$space-8;
+  border-radius: v.$radius-xl;
+  background-color: var(--dl-card);
+  border: 1px solid var(--dl-border);
+}
+
+.completeIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: v.$radius-full;
+  background-color: var(--dl-success-50);
+  color: var(--dl-success-600);
+  margin-bottom: v.$space-4;
+  animation: pop-in 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes pop-in {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.summaryRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: v.$space-2;
+  margin: v.$space-4 0 v.$space-6;
+}
+
+.summaryPill {
+  padding: v.$space-1 v.$space-3;
+  border-radius: v.$radius-full;
+  font-size: v.$font-size-xs;
+  font-weight: v.$font-weight-semibold;
+  background-color: var(--dl-card-hover);
+}
+
+.completeActions {
+  display: flex;
+  justify-content: center;
+  gap: v.$space-3;
+}
+
+// ── Empty / error state ──────────────────────────────────────────────
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: v.$space-16 v.$space-4;
+  color: var(--dl-text-secondary);
+}
+
+.emptyIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: v.$radius-full;
+  background-color: var(--dl-danger-50);
+  color: var(--dl-danger-600);
+  margin-bottom: v.$space-4;
+}
+
+.emptyIconSuccess {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: v.$radius-full;
+  background-color: var(--dl-success-50);
+  color: var(--dl-success-600);
+  margin-bottom: v.$space-4;
+}
+
+.emptyActions {
+  display: flex;
+  gap: v.$space-3;
+  margin-top: v.$space-4;
+}
+
+// ── Back link ─────────────────────────────────────────────────────────
+.backLink {
+  display: block;
+  text-align: center;
+  font-size: v.$font-size-sm;
+  font-weight: v.$font-weight-medium;
+  color: var(--dl-text-secondary);
+  margin-top: v.$space-8;
+
+  &:hover {
+    color: var(--dl-primary-600);
+  }
+}

@@ -136,6 +136,7 @@ function DashboardPage() {
           iconColor="var(--dl-info-600)"
           value={String(dashboard.wordsToReviewCount)}
           label="Từ cần ôn tập"
+          to="/review"
         />
       </div>
 

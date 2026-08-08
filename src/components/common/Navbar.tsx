@@ -22,6 +22,11 @@ function Navbar() {
         <Link to="/decks" className="nav-link d-inline">
           Deck
         </Link>
+        {user && (
+          <Link to="/review" className="nav-link d-inline">
+            Ôn tập
+          </Link>
+        )}
         <div className="d-flex align-items-center gap-3 ms-auto">
           {user ? (
             <>

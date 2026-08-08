@@ -1,5 +1,14 @@
 @use '../../styles/variables' as v;
 
+.link {
+  display: block;
+  color: inherit;
+
+  &:hover {
+    color: inherit;
+  }
+}
+
 .tile {
   display: flex;
   align-items: center;

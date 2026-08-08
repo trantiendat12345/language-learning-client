@@ -23,6 +23,7 @@ import DeckDetailPage from '../pages/decks/DeckDetailPage'
 import FlashcardPage from '../pages/decks/FlashcardPage'
 import QuizPage from '../pages/lessons/QuizPage'
 import QuizHistoryPage from '../pages/QuizHistoryPage'
+import ReviewPage from '../pages/ReviewPage'
 
 function AppRoutes() {
   return (
@@ -41,6 +42,7 @@ function AppRoutes() {
               <Route path="/decks/:id/flashcard" element={<FlashcardPage />} />
               <Route path="/lessons/:id/quiz" element={<QuizPage />} />
               <Route path="/quiz-history" element={<QuizHistoryPage />} />
+              <Route path="/review" element={<ReviewPage />} />
             </Route>
             <Route element={<AuthLayout />}>
               <Route path="/verify-email" element={<VerifyEmailPage />} />
