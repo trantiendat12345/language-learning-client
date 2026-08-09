@@ -1,0 +1,125 @@
+@use '../../styles/variables' as v;
+
+.wrapper {
+  display: inline-block;
+}
+
+.panel {
+  margin-top: v.$space-3;
+  width: min(480px, 90vw);
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-3;
+}
+
+.hint {
+  margin: 0;
+  font-size: v.$font-size-sm;
+  color: var(--dl-danger-600);
+}
+
+.formatTabs {
+  display: flex;
+  gap: v.$space-2;
+}
+
+.formatTab {
+  display: inline-flex;
+  align-items: center;
+  gap: v.$space-1;
+  padding: v.$space-1 v.$space-3;
+  border-radius: v.$radius-full;
+  border: 1px solid var(--dl-border);
+  background-color: transparent;
+  color: var(--dl-text-secondary);
+  font-size: v.$font-size-sm;
+}
+
+.formatTabActive {
+  border-color: var(--dl-primary-500);
+  background-color: var(--dl-primary-50);
+  color: var(--dl-primary-600);
+}
+
+.dropzone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 88px;
+  padding: v.$space-4;
+  border-radius: v.$radius-md;
+  border: 1.5px dashed var(--dl-border);
+  cursor: pointer;
+}
+
+.dropzoneActive {
+  border-color: var(--dl-primary-500);
+  background-color: var(--dl-primary-50);
+}
+
+.dropzoneDisabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.hiddenInput {
+  display: none;
+}
+
+.dropzoneHint {
+  font-size: v.$font-size-sm;
+  color: var(--dl-text-tertiary);
+}
+
+.selectedFileName {
+  font-size: v.$font-size-sm;
+  font-weight: v.$font-weight-semibold;
+  color: var(--dl-text-primary);
+}
+
+.actionsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: v.$space-2;
+}
+
+.errorText {
+  color: var(--dl-danger-600);
+  font-size: v.$font-size-sm;
+  margin: 0;
+}
+
+.resultBox {
+  padding: v.$space-3;
+  border-radius: v.$radius-md;
+  background-color: var(--dl-card-hover);
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-2;
+}
+
+.resultSummary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: v.$space-3;
+  font-size: v.$font-size-sm;
+  font-weight: v.$font-weight-semibold;
+}
+
+.resultImported {
+  color: var(--dl-success-600);
+}
+
+.resultFailed {
+  color: var(--dl-danger-600);
+}
+
+.errorList {
+  margin: 0;
+  padding-left: v.$space-4;
+  font-size: v.$font-size-sm;
+  color: var(--dl-text-primary);
+  max-height: 200px;
+  overflow-y: auto;
+}

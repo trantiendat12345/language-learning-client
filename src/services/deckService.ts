@@ -1,5 +1,6 @@
 import axiosClient from '../api/axiosClient'
 import type { ApiResponse, PageResponse } from '../types/api'
+import type { ImportResult } from '../types/import'
 import type {
   DeckCardAddRequest,
   DeckCardResponse,
@@ -63,6 +64,34 @@ async function cloneDeck(id: number): Promise<DeckResponse> {
   return response.data.data
 }
 
+async function importCardsCsv(id: number, file: File): Promise<ImportResult> {
+  const formData = new FormData()
+  formData.append('file', file)
+  const response = await axiosClient.post<ApiResponse<ImportResult>>(`/api/decks/${id}/cards/import/csv`, formData, {
+    headers: { 'Content-Type': undefined },
+  })
+  return response.data.data
+}
+
+async function importCardsExcel(id: number, file: File): Promise<ImportResult> {
+  const formData = new FormData()
+  formData.append('file', file)
+  const response = await axiosClient.post<ApiResponse<ImportResult>>(`/api/decks/${id}/cards/import/excel`, formData, {
+    headers: { 'Content-Type': undefined },
+  })
+  return response.data.data
+}
+
+async function downloadCardCsvTemplate(): Promise<Blob> {
+  const response = await axiosClient.get('/api/decks/template/csv', { responseType: 'blob' })
+  return response.data
+}
+
+async function downloadCardExcelTemplate(): Promise<Blob> {
+  const response = await axiosClient.get('/api/decks/template/excel', { responseType: 'blob' })
+  return response.data
+}
+
 export default {
   getPublicDecks,
   getMyDecks,
@@ -74,4 +103,8 @@ export default {
   addCard,
   deleteCard,
   cloneDeck,
+  importCardsCsv,
+  importCardsExcel,
+  downloadCardCsvTemplate,
+  downloadCardExcelTemplate,
 }

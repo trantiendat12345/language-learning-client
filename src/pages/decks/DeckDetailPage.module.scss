@@ -103,6 +103,14 @@
   justify-content: space-between;
   gap: v.$space-2;
   margin-bottom: v.$space-4;
+  flex-wrap: wrap;
+}
+
+.cardsSectionActions {
+  display: flex;
+  align-items: flex-start;
+  gap: v.$space-2;
+  flex-wrap: wrap;
 }
 
 .addCardForm {

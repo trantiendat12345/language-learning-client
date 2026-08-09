@@ -5,6 +5,7 @@ import vocabularyService from '../../services/vocabularyService'
 import languageService from '../../services/languageService'
 import { getApiErrorMessage } from '../../api/apiError'
 import { Badge, Button, Card, Input, Pagination, Select, Skeleton } from '../../components/ui'
+import SpreadsheetImportPanel from '../../components/common/SpreadsheetImportPanel'
 import type { VocabularyResponse, VocabularyStatus, VocabularySummaryResponse } from '../../types/vocabulary'
 import type { LanguageResponse } from '../../types/language'
 import styles from './AdminVocabularyListPage.module.scss'
@@ -81,6 +82,9 @@ function AdminVocabularyListPage() {
   const [deletingId, setDeletingId] = useState<number | null>(null)
   const [actionError, setActionError] = useState<string | null>(null)
 
+  const [importLanguageId, setImportLanguageId] = useState('')
+  const [refreshKey, setRefreshKey] = useState(0)
+
   useEffect(() => {
     languageService.getActiveLanguages().then(setLanguages)
   }, [])
@@ -107,7 +111,12 @@ function AdminVocabularyListPage() {
     return () => {
       ignore = true
     }
-  }, [page])
+  }, [page, refreshKey])
+
+  function handleImportSuccess() {
+    setPage(0)
+    setRefreshKey((k) => k + 1)
+  }
 
   async function onCreateSubmit(data: VocabForm) {
     setIsCreating(true)
@@ -218,9 +227,34 @@ function AdminVocabularyListPage() {
           <h1>Từ vựng</h1>
           <p className={styles.subtitle}>Quản lý kho từ vựng hệ thống</p>
         </div>
-        <Button onClick={() => setShowCreateForm((v) => !v)} leftIcon={showCreateForm ? <X size={16} /> : <Plus size={16} />}>
-          {showCreateForm ? 'Đóng' : 'Tạo từ mới'}
-        </Button>
+        <div className={styles.headerActions}>
+          <Button onClick={() => setShowCreateForm((v) => !v)} leftIcon={showCreateForm ? <X size={16} /> : <Plus size={16} />}>
+            {showCreateForm ? 'Đóng' : 'Tạo từ mới'}
+          </Button>
+          <div className={styles.importGroup}>
+            <Select
+              className={styles.importLanguageSelect}
+              value={importLanguageId}
+              onChange={(e) => setImportLanguageId(e.target.value)}
+            >
+              <option value="">Chọn ngôn ngữ để Import</option>
+              {languages.map((l) => (
+                <option key={l.id} value={l.id}>
+                  {l.name}
+                </option>
+              ))}
+            </Select>
+            <SpreadsheetImportPanel
+              disabled={!importLanguageId}
+              disabledHint="Chọn Ngôn ngữ ở trên trước khi Import"
+              onImportCsv={(file) => vocabularyService.importVocabulariesCsv(Number(importLanguageId), file)}
+              onImportExcel={(file) => vocabularyService.importVocabulariesExcel(Number(importLanguageId), file)}
+              onDownloadCsvTemplate={vocabularyService.downloadVocabularyCsvTemplate}
+              onDownloadExcelTemplate={vocabularyService.downloadVocabularyExcelTemplate}
+              onImportSuccess={handleImportSuccess}
+            />
+          </div>
+        </div>
       </div>
 
       {showCreateForm && (

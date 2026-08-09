@@ -17,6 +17,25 @@
   color: var(--dl-text-secondary);
 }
 
+.headerActions {
+  display: flex;
+  align-items: flex-start;
+  gap: v.$space-3;
+  flex-wrap: wrap;
+}
+
+.importGroup {
+  display: flex;
+  align-items: center;
+  gap: v.$space-2;
+  flex-wrap: wrap;
+}
+
+.importLanguageSelect {
+  min-width: 200px;
+  margin-bottom: 0;
+}
+
 .form,
 .editForm {
   display: grid;

@@ -19,6 +19,7 @@ import deckService from '../../services/deckService'
 import { getApiErrorMessage } from '../../api/apiError'
 import { useAuthContext } from '../../contexts/AuthContext'
 import { Badge, Button, ButtonLink, Card, Input, Select, Skeleton } from '../../components/ui'
+import SpreadsheetImportPanel from '../../components/common/SpreadsheetImportPanel'
 import type { DeckCardResponse, DeckResponse, DeckStatus, DeckVisibility } from '../../types/deck'
 import styles from './DeckDetailPage.module.scss'
 
@@ -184,6 +185,17 @@ function DeckDetailPage() {
     }
   }
 
+  async function handleImportSuccess() {
+    if (!deck) return
+    try {
+      const [cardsData, deckData] = await Promise.all([deckService.getDeckCards(deck.id), deckService.getDeckById(deck.id)])
+      setCards(cardsData)
+      setDeck(deckData)
+    } catch (error) {
+      setActionError(getApiErrorMessage(error))
+    }
+  }
+
   async function handleDeleteCard(cardId: number) {
     if (!deck) return
     setDeletingCardId(cardId)
@@ -310,14 +322,23 @@ function DeckDetailPage() {
             Danh sách thẻ
           </h2>
           {isOwner && (
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => setShowAddCardForm((v) => !v)}
-              leftIcon={showAddCardForm ? <X size={14} /> : <Plus size={14} />}
-            >
-              {showAddCardForm ? 'Đóng' : 'Thêm từ'}
-            </Button>
+            <div className={styles.cardsSectionActions}>
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => setShowAddCardForm((v) => !v)}
+                leftIcon={showAddCardForm ? <X size={14} /> : <Plus size={14} />}
+              >
+                {showAddCardForm ? 'Đóng' : 'Thêm từ'}
+              </Button>
+              <SpreadsheetImportPanel
+                onImportCsv={(file) => deckService.importCardsCsv(deck.id, file)}
+                onImportExcel={(file) => deckService.importCardsExcel(deck.id, file)}
+                onDownloadCsvTemplate={deckService.downloadCardCsvTemplate}
+                onDownloadExcelTemplate={deckService.downloadCardExcelTemplate}
+                onImportSuccess={handleImportSuccess}
+              />
+            </div>
           )}
         </div>
 

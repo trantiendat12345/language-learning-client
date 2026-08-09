@@ -1,5 +1,6 @@
 import axiosClient from '../api/axiosClient'
 import type { ApiResponse, PageResponse } from '../types/api'
+import type { ImportResult } from '../types/import'
 import type {
   VocabularyCreateRequest,
   VocabularyResponse,
@@ -47,6 +48,36 @@ async function deleteVocabulary(id: number): Promise<void> {
   await axiosClient.delete(`/api/admin/vocabularies/${id}`)
 }
 
+async function importVocabulariesCsv(languageId: number, file: File): Promise<ImportResult> {
+  const formData = new FormData()
+  formData.append('file', file)
+  const response = await axiosClient.post<ApiResponse<ImportResult>>('/api/admin/vocabularies/import/csv', formData, {
+    params: { languageId },
+    headers: { 'Content-Type': undefined },
+  })
+  return response.data.data
+}
+
+async function importVocabulariesExcel(languageId: number, file: File): Promise<ImportResult> {
+  const formData = new FormData()
+  formData.append('file', file)
+  const response = await axiosClient.post<ApiResponse<ImportResult>>('/api/admin/vocabularies/import/excel', formData, {
+    params: { languageId },
+    headers: { 'Content-Type': undefined },
+  })
+  return response.data.data
+}
+
+async function downloadVocabularyCsvTemplate(): Promise<Blob> {
+  const response = await axiosClient.get('/api/admin/vocabularies/template/csv', { responseType: 'blob' })
+  return response.data
+}
+
+async function downloadVocabularyExcelTemplate(): Promise<Blob> {
+  const response = await axiosClient.get('/api/admin/vocabularies/template/excel', { responseType: 'blob' })
+  return response.data
+}
+
 export default {
   getVocabularyById,
   searchVocabularies,
@@ -55,4 +86,8 @@ export default {
   createVocabulary,
   updateVocabulary,
   deleteVocabulary,
+  importVocabulariesCsv,
+  importVocabulariesExcel,
+  downloadVocabularyCsvTemplate,
+  downloadVocabularyExcelTemplate,
 }
