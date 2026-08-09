@@ -7,6 +7,7 @@ import { getApiErrorMessage } from '../../api/apiError'
 import { Button, Card, Input, Select, Skeleton } from '../../components/ui'
 import LessonVocabularyManager from '../../components/admin/LessonVocabularyManager'
 import LessonGrammarManager from '../../components/admin/LessonGrammarManager'
+import LessonQuestionManager from '../../components/admin/LessonQuestionManager'
 import type { LessonResponse, LessonStatus, LessonVocabularyResponse } from '../../types/lesson'
 import type { GrammarResponse } from '../../types/grammar'
 import styles from './AdminLessonDetailPage.module.scss'
@@ -178,6 +179,8 @@ function AdminLessonDetailPage() {
         grammars={lesson.grammars}
         onChange={(grammars: GrammarResponse[]) => setLesson((prev) => (prev ? { ...prev, grammars } : prev))}
       />
+
+      <LessonQuestionManager lessonId={lesson.id} />
     </div>
   )
 }

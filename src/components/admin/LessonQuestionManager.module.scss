@@ -1,0 +1,71 @@
+@use '../../styles/variables' as v;
+
+.section {
+  margin-top: v.$space-8;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: v.$space-2;
+  margin-bottom: v.$space-4;
+}
+
+.errorText {
+  color: var(--dl-danger-600);
+  font-size: v.$font-size-sm;
+  margin: 0 0 v.$space-3;
+}
+
+.emptyText {
+  color: var(--dl-text-secondary);
+  text-align: center;
+  padding: v.$space-6 0;
+  margin: 0;
+}
+
+.formCard {
+  margin-bottom: v.$space-4;
+}
+
+.questionList {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-3;
+}
+
+.questionItem {
+  overflow: hidden;
+}
+
+.questionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: v.$space-3;
+  margin-bottom: v.$space-2;
+}
+
+.questionPrompt {
+  font-weight: v.$font-weight-semibold;
+  color: var(--dl-text-primary);
+}
+
+.questionActions {
+  display: flex;
+  gap: v.$space-2;
+  flex-shrink: 0;
+}
+
+.questionMeta {
+  display: flex;
+  gap: v.$space-2;
+  flex-wrap: wrap;
+}
+
+.editFormWrapper {
+  margin-top: v.$space-4;
+  padding-top: v.$space-4;
+  border-top: 1px solid var(--dl-border);
+}

@@ -1,5 +1,5 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
-import { LayoutDashboard, LogOut, Users, ArrowLeftCircle, BookOpen, Globe, GraduationCap } from 'lucide-react'
+import { LayoutDashboard, LogOut, Users, ArrowLeftCircle, BookOpen, Globe, GraduationCap, HelpCircle } from 'lucide-react'
 import { useAuthContext } from '../contexts/AuthContext'
 import Logo from '../components/common/Logo'
 import ThemeToggle from '../components/common/ThemeToggle'
@@ -10,6 +10,7 @@ const NAV_ITEMS = [
   { to: '/admin/users', label: 'Người dùng', icon: Users, end: false },
   { to: '/admin/courses', label: 'Khoá học', icon: BookOpen, end: false },
   { to: '/admin/vocabularies', label: 'Từ vựng', icon: GraduationCap, end: false },
+  { to: '/admin/questions', label: 'Câu hỏi', icon: HelpCircle, end: false },
   { to: '/admin/languages', label: 'Ngôn ngữ', icon: Globe, end: false },
 ]
 

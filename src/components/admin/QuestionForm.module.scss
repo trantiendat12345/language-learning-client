@@ -1,0 +1,85 @@
+@use '../../styles/variables' as v;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-4;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: v.$space-3;
+
+  @media (max-width: v.$breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.optionsBlock {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-2;
+}
+
+.optionsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: v.$font-size-sm;
+  font-weight: v.$font-weight-semibold;
+  color: var(--dl-text-secondary);
+}
+
+.optionsHint {
+  margin: 0;
+  font-size: v.$font-size-xs;
+  color: var(--dl-text-tertiary);
+}
+
+.optionRow {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr auto;
+  gap: v.$space-2;
+  align-items: center;
+
+  @media (max-width: v.$breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.correctCheckbox {
+  display: flex;
+  align-items: center;
+  gap: v.$space-1;
+  font-size: v.$font-size-xs;
+  color: var(--dl-text-secondary);
+  white-space: nowrap;
+}
+
+.removeOptionBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: v.$radius-sm;
+  color: var(--dl-text-tertiary);
+
+  &:hover {
+    color: var(--dl-danger-600);
+    background-color: var(--dl-danger-50);
+  }
+}
+
+.formActions {
+  display: flex;
+  gap: v.$space-2;
+}
+
+.errorText {
+  color: var(--dl-danger-600);
+  font-size: v.$font-size-sm;
+  margin: 0;
+}

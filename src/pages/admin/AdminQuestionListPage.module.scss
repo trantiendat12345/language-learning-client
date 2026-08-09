@@ -1,0 +1,138 @@
+@use '../../styles/variables' as v;
+
+.page {
+  max-width: 900px;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: v.$space-4;
+  margin-bottom: v.$space-6;
+  flex-wrap: wrap;
+}
+
+.subtitle {
+  color: var(--dl-text-secondary);
+}
+
+.formCard {
+  margin-bottom: v.$space-6;
+}
+
+.filterCard {
+  margin-bottom: v.$space-6;
+}
+
+.filterRow {
+  display: flex;
+  align-items: flex-end;
+  gap: v.$space-3;
+  flex-wrap: wrap;
+}
+
+.filterIdField {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-1;
+}
+
+.filterIdLabel {
+  font-size: v.$font-size-sm;
+  color: var(--dl-text-secondary);
+}
+
+.filterIdInput {
+  height: 40px;
+  padding: 0 v.$space-3;
+  border-radius: v.$radius-md;
+  border: 1px solid var(--dl-border);
+  background-color: var(--dl-card);
+  color: var(--dl-text-primary);
+  width: 140px;
+
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
+.filterActions {
+  display: flex;
+  gap: v.$space-2;
+}
+
+.errorText {
+  color: var(--dl-danger-600);
+  font-size: v.$font-size-sm;
+  margin: 0 0 v.$space-4;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-3;
+  margin-bottom: v.$space-6;
+}
+
+.item {
+  overflow: hidden;
+}
+
+.itemRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: v.$space-4;
+  flex-wrap: wrap;
+}
+
+.itemMain {
+  display: flex;
+  align-items: center;
+  gap: v.$space-3;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.itemPrompt {
+  font-weight: v.$font-weight-semibold;
+  color: var(--dl-text-primary);
+  max-width: 360px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.itemActions {
+  display: flex;
+  gap: v.$space-2;
+  flex-shrink: 0;
+}
+
+.editFormWrapper {
+  margin-top: v.$space-4;
+  padding-top: v.$space-4;
+  border-top: 1px solid var(--dl-border);
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: v.$space-16 v.$space-4;
+  color: var(--dl-text-secondary);
+}
+
+.emptyIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: v.$radius-full;
+  background-color: var(--dl-card-hover);
+  color: var(--dl-text-tertiary);
+  margin-bottom: v.$space-4;
+}
