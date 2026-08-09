@@ -1,4 +1,5 @@
-// Khớp vocabulary/dto/response/VocabularyResponse.java, VocabularySummaryResponse.java ở Backend.
+// Khớp vocabulary/dto/response/VocabularyResponse.java, VocabularySummaryResponse.java,
+// request/VocabularyCreateRequest.java, VocabularyUpdateRequest.java ở Backend.
 
 export type VocabularyStatus = 'ACTIVE' | 'ARCHIVED'
 
@@ -28,5 +29,35 @@ export interface VocabularyResponse {
   exampleSentence: string | null
   exampleTranslation: string | null
   frequencyRank: number | null
+  status: VocabularyStatus
+}
+
+// Không có ownerId - Admin chỉ tạo từ hệ thống (owner luôn null).
+export interface VocabularyCreateRequest {
+  languageId: number
+  word: string
+  meaning: string
+  ipa?: string
+  pronunciationAudioUrl?: string
+  wordType?: string
+  imageUrl?: string
+  difficulty?: string
+  exampleSentence?: string
+  exampleTranslation?: string
+  frequencyRank?: number
+}
+
+export interface VocabularyUpdateRequest {
+  languageId: number
+  word: string
+  meaning: string
+  ipa?: string
+  pronunciationAudioUrl?: string
+  wordType?: string
+  imageUrl?: string
+  difficulty?: string
+  exampleSentence?: string
+  exampleTranslation?: string
+  frequencyRank?: number
   status: VocabularyStatus
 }

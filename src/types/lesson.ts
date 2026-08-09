@@ -1,5 +1,6 @@
 // Khớp lesson/dto/response/LessonSummaryResponse.java, LessonResponse.java,
-// LessonVocabularyResponse.java, request/LessonCreateRequest.java, LessonUpdateRequest.java ở Backend.
+// LessonVocabularyResponse.java, request/LessonCreateRequest.java, LessonUpdateRequest.java,
+// LessonVocabularyAttachRequest.java ở Backend.
 
 import type { GrammarResponse } from './grammar'
 
@@ -64,4 +65,10 @@ export interface LessonUpdateRequest {
   audioUrl?: string
   estimatedMinutes?: number
   status: LessonStatus
+}
+
+// lessonId lấy từ path (POST /api/admin/lessons/{lessonId}/vocabularies), không nằm trong body.
+export interface LessonVocabularyAttachRequest {
+  vocabularyId: number
+  displayOrder: number
 }

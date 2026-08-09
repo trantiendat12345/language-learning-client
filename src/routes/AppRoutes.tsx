@@ -32,6 +32,7 @@ import AdminLanguageListPage from '../pages/admin/AdminLanguageListPage'
 import AdminCourseListPage from '../pages/admin/AdminCourseListPage'
 import AdminCourseDetailPage from '../pages/admin/AdminCourseDetailPage'
 import AdminLessonDetailPage from '../pages/admin/AdminLessonDetailPage'
+import AdminVocabularyListPage from '../pages/admin/AdminVocabularyListPage'
 
 function AppRoutes() {
   return (
@@ -75,6 +76,7 @@ function AppRoutes() {
                 <Route path="/admin/courses" element={<AdminCourseListPage />} />
                 <Route path="/admin/courses/:id" element={<AdminCourseDetailPage />} />
                 <Route path="/admin/lessons/:id" element={<AdminLessonDetailPage />} />
+                <Route path="/admin/vocabularies" element={<AdminVocabularyListPage />} />
               </Route>
             </Route>
           </Routes>

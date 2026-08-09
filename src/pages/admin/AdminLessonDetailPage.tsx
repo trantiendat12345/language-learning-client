@@ -5,7 +5,10 @@ import { AlertCircle, ArrowLeft, Trash2 } from 'lucide-react'
 import lessonService from '../../services/lessonService'
 import { getApiErrorMessage } from '../../api/apiError'
 import { Button, Card, Input, Select, Skeleton } from '../../components/ui'
-import type { LessonResponse, LessonStatus } from '../../types/lesson'
+import LessonVocabularyManager from '../../components/admin/LessonVocabularyManager'
+import LessonGrammarManager from '../../components/admin/LessonGrammarManager'
+import type { LessonResponse, LessonStatus, LessonVocabularyResponse } from '../../types/lesson'
+import type { GrammarResponse } from '../../types/grammar'
 import styles from './AdminLessonDetailPage.module.scss'
 
 interface EditForm {
@@ -164,9 +167,17 @@ function AdminLessonDetailPage() {
         </form>
       </Card>
 
-      <p className={styles.hintText}>
-        Quản lý Từ vựng và Ngữ pháp gắn vào bài học này sẽ có ở bước tiếp theo.
-      </p>
+      <LessonVocabularyManager
+        lessonId={lesson.id}
+        vocabularies={lesson.vocabularies}
+        onChange={(vocabularies: LessonVocabularyResponse[]) => setLesson((prev) => (prev ? { ...prev, vocabularies } : prev))}
+      />
+
+      <LessonGrammarManager
+        lessonId={lesson.id}
+        grammars={lesson.grammars}
+        onChange={(grammars: GrammarResponse[]) => setLesson((prev) => (prev ? { ...prev, grammars } : prev))}
+      />
     </div>
   )
 }

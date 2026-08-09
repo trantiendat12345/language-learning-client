@@ -1,6 +1,6 @@
 import axiosClient from '../api/axiosClient'
 import type { ApiResponse } from '../types/api'
-import type { LessonResponse, LessonUpdateRequest } from '../types/lesson'
+import type { LessonResponse, LessonUpdateRequest, LessonVocabularyAttachRequest } from '../types/lesson'
 import type { LessonCompleteResponse } from '../types/progress'
 
 async function getLessonById(id: number): Promise<LessonResponse> {
@@ -27,4 +27,20 @@ async function deleteLesson(id: number): Promise<void> {
   await axiosClient.delete(`/api/admin/lessons/${id}`)
 }
 
-export default { getLessonById, completeLesson, getLessonByIdForAdmin, updateLesson, deleteLesson }
+async function attachVocabulary(lessonId: number, request: LessonVocabularyAttachRequest): Promise<void> {
+  await axiosClient.post(`/api/admin/lessons/${lessonId}/vocabularies`, request)
+}
+
+async function detachVocabulary(lessonId: number, vocabularyId: number): Promise<void> {
+  await axiosClient.delete(`/api/admin/lessons/${lessonId}/vocabularies/${vocabularyId}`)
+}
+
+export default {
+  getLessonById,
+  completeLesson,
+  getLessonByIdForAdmin,
+  updateLesson,
+  deleteLesson,
+  attachVocabulary,
+  detachVocabulary,
+}

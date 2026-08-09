@@ -1,0 +1,150 @@
+@use '../../styles/variables' as v;
+
+.section {
+  margin-top: v.$space-8;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: v.$space-2;
+  margin-bottom: v.$space-4;
+}
+
+.errorText {
+  color: var(--dl-danger-600);
+  font-size: v.$font-size-sm;
+  margin: v.$space-3 0 0;
+}
+
+.emptyText {
+  color: var(--dl-text-secondary);
+  text-align: center;
+  padding: v.$space-6 0;
+  margin: 0;
+}
+
+.formCard {
+  margin-bottom: v.$space-4;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-4;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: v.$space-3;
+
+  @media (max-width: v.$breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.examplesBlock {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-2;
+}
+
+.examplesHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: v.$font-size-sm;
+  font-weight: v.$font-weight-semibold;
+  color: var(--dl-text-secondary);
+}
+
+.exampleRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: v.$space-2;
+  align-items: center;
+
+  @media (max-width: v.$breakpoint-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.removeExampleBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: v.$radius-sm;
+  color: var(--dl-text-tertiary);
+
+  &:hover {
+    color: var(--dl-danger-600);
+    background-color: var(--dl-danger-50);
+  }
+}
+
+.formActions {
+  display: flex;
+  gap: v.$space-2;
+}
+
+.grammarList {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-4;
+}
+
+.grammarItem {
+  overflow: hidden;
+}
+
+.grammarHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: v.$space-3;
+  margin-bottom: v.$space-2;
+}
+
+.grammarTitle {
+  font-weight: v.$font-weight-bold;
+  color: var(--dl-text-primary);
+}
+
+.grammarActions {
+  display: flex;
+  gap: v.$space-2;
+  flex-shrink: 0;
+}
+
+.grammarPattern {
+  display: inline-block;
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: v.$font-size-sm;
+  padding: v.$space-1 v.$space-3;
+  border-radius: v.$radius-sm;
+  background-color: var(--dl-secondary-50);
+  color: var(--dl-secondary-600);
+  margin-bottom: v.$space-2;
+}
+
+.grammarExplanation {
+  color: var(--dl-text-secondary);
+  font-size: v.$font-size-sm;
+  margin: 0 0 v.$space-2;
+}
+
+.exampleList {
+  margin: 0;
+  padding-left: v.$space-6;
+  font-size: v.$font-size-sm;
+  color: var(--dl-text-primary);
+}
+
+.exampleTranslation {
+  color: var(--dl-text-tertiary);
+}

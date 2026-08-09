@@ -1,0 +1,119 @@
+@use '../../styles/variables' as v;
+
+.section {
+  margin-top: v.$space-8;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: v.$space-2;
+  margin-bottom: v.$space-4;
+}
+
+.errorText {
+  color: var(--dl-danger-600);
+  font-size: v.$font-size-sm;
+  margin: 0 0 v.$space-3;
+}
+
+.searchCard {
+  margin-bottom: v.$space-4;
+}
+
+.searchRow {
+  display: flex;
+  gap: v.$space-3;
+}
+
+.searchResults {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-2;
+  margin-top: v.$space-4;
+}
+
+.searchResultRow {
+  display: flex;
+  align-items: center;
+  gap: v.$space-3;
+  padding: v.$space-2 v.$space-3;
+  border-radius: v.$radius-sm;
+  background-color: var(--dl-card-hover);
+}
+
+.resultWord {
+  font-weight: v.$font-weight-semibold;
+  color: var(--dl-text-primary);
+}
+
+.resultMeaning {
+  flex: 1;
+  min-width: 0;
+  font-size: v.$font-size-sm;
+  color: var(--dl-text-secondary);
+}
+
+.emptyText {
+  color: var(--dl-text-secondary);
+  text-align: center;
+  padding: v.$space-6 0;
+  margin: 0;
+}
+
+.vocabList {
+  display: flex;
+  flex-direction: column;
+  gap: v.$space-3;
+}
+
+.vocabRow {
+  display: flex;
+  align-items: center;
+  gap: v.$space-4;
+}
+
+.vocabImage {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: v.$radius-sm;
+  object-fit: cover;
+}
+
+.vocabImageFallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: v.$radius-sm;
+  background: linear-gradient(135deg, var(--dl-primary-400), var(--dl-secondary-500));
+  color: #fff;
+}
+
+.vocabInfo {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.vocabWord {
+  font-weight: v.$font-weight-semibold;
+  color: var(--dl-text-primary);
+}
+
+.vocabIpa {
+  font-size: v.$font-size-xs;
+  font-weight: v.$font-weight-regular;
+  color: var(--dl-text-tertiary);
+}
+
+.vocabMeaning {
+  font-size: v.$font-size-sm;
+  color: var(--dl-text-secondary);
+}

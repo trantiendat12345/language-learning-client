@@ -1,7 +1,7 @@
 @use '../../styles/variables' as v;
 
 .page {
-  max-width: 800px;
+  max-width: 900px;
 }
 
 .backLink {
@@ -53,13 +53,6 @@
   grid-column: 1 / -1;
   display: flex;
   gap: v.$space-2;
-}
-
-.hintText {
-  color: var(--dl-text-tertiary);
-  font-size: v.$font-size-sm;
-  font-style: italic;
-  margin-top: v.$space-6;
 }
 
 .errorState {
